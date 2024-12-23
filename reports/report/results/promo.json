@@ -1,0 +1,125 @@
+{"version":"3","listProblem":[{
+  "tool": "Code Inspection",
+  "category": "Code style issues",
+  "type": "Field may be 'final'",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Field `orderController` may be 'final'",
+  "detailsInfo": "Reports fields that can be safely made `final`. All `final` fields have a value and this value does not change, which can make the code easier to reason about.\n\nTo avoid too expensive analysis, this inspection only reports if the field has a `private` modifier\nor it is defined in a local or anonymous class.\nA field can be `final` if:\n\n* It is `static` and initialized once in its declaration or in one `static` initializer.\n* It is non-`static` and initialized once in its declaration, in one instance initializer or in every constructor\n\nAnd it is not modified anywhere else.\n\n**Example:**\n\n\n      public class Person {\n        private String name; // can be final\n\n        Person(String name) {\n          this.name = name;\n        }\n\n        public String getName() {\n          return name;\n        }\n      }\n\nAfter the quick-fix is applied:\n\n\n      public class Person {\n        private final String name;\n\n        Person(String name) {\n          this.name = name;\n        }\n\n        public String getName() {\n          return name;\n        }\n      }\n\n\nUse the \"Annotations\" button to modify the list of annotations that assume implicit field write.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/com/example/javafxtutorial/view/CheckPerformancePageView.java",
+      "language": "JAVA",
+      "line": 34,
+      "offset": 29,
+      "length": 15,
+      "code": {
+        "startLine": 32,
+        "length": 15,
+        "offset": 71,
+        "surroundingCode": "public class CheckPerformancePageView {\r\n\r\n    private OrderController orderController;\r\n\r\n    private EmployeeController employeeController;\r"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Bookstore_Unejsi_Isufaj",
+    "inspectionName": "FieldMayBeFinal"
+  },
+  "hash": "1922910481c068da66f4c67ed8e2dc6cf5e72d42aee4fa4293215b6a6410a6cf"
+},{
+  "tool": "Code Inspection",
+  "category": "Code style issues",
+  "type": "Field may be 'final'",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Field `primaryStage` may be 'final'",
+  "detailsInfo": "Reports fields that can be safely made `final`. All `final` fields have a value and this value does not change, which can make the code easier to reason about.\n\nTo avoid too expensive analysis, this inspection only reports if the field has a `private` modifier\nor it is defined in a local or anonymous class.\nA field can be `final` if:\n\n* It is `static` and initialized once in its declaration or in one `static` initializer.\n* It is non-`static` and initialized once in its declaration, in one instance initializer or in every constructor\n\nAnd it is not modified anywhere else.\n\n**Example:**\n\n\n      public class Person {\n        private String name; // can be final\n\n        Person(String name) {\n          this.name = name;\n        }\n\n        public String getName() {\n          return name;\n        }\n      }\n\nAfter the quick-fix is applied:\n\n\n      public class Person {\n        private final String name;\n\n        Person(String name) {\n          this.name = name;\n        }\n\n        public String getName() {\n          return name;\n        }\n      }\n\n\nUse the \"Annotations\" button to modify the list of annotations that assume implicit field write.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/com/example/javafxtutorial/view/CheckPerformancePageView.java",
+      "language": "JAVA",
+      "line": 40,
+      "offset": 19,
+      "length": 12,
+      "code": {
+        "startLine": 38,
+        "length": 12,
+        "offset": 61,
+        "surroundingCode": "    private Employee currentLoggedUser;\r\n\r\n    private Stage primaryStage;\r\n\r\n    public CheckPerformancePageView(OrderController orderController, EmployeeController employeeController, Employee currentLoggedUser, Stage primaryStage){\r"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Bookstore_Unejsi_Isufaj",
+    "inspectionName": "FieldMayBeFinal"
+  },
+  "hash": "48f9e5558ac3aaaa01a1fc02c36634102c5d3210244114a6fdd17ff8dcb39acd"
+},{
+  "tool": "Code Inspection",
+  "category": "Code style issues",
+  "type": "Field may be 'final'",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Field `employeeController` may be 'final'",
+  "detailsInfo": "Reports fields that can be safely made `final`. All `final` fields have a value and this value does not change, which can make the code easier to reason about.\n\nTo avoid too expensive analysis, this inspection only reports if the field has a `private` modifier\nor it is defined in a local or anonymous class.\nA field can be `final` if:\n\n* It is `static` and initialized once in its declaration or in one `static` initializer.\n* It is non-`static` and initialized once in its declaration, in one instance initializer or in every constructor\n\nAnd it is not modified anywhere else.\n\n**Example:**\n\n\n      public class Person {\n        private String name; // can be final\n\n        Person(String name) {\n          this.name = name;\n        }\n\n        public String getName() {\n          return name;\n        }\n      }\n\nAfter the quick-fix is applied:\n\n\n      public class Person {\n        private final String name;\n\n        Person(String name) {\n          this.name = name;\n        }\n\n        public String getName() {\n          return name;\n        }\n      }\n\n\nUse the \"Annotations\" button to modify the list of annotations that assume implicit field write.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/com/example/javafxtutorial/view/CheckPerformancePageView.java",
+      "language": "JAVA",
+      "line": 36,
+      "offset": 32,
+      "length": 18,
+      "code": {
+        "startLine": 34,
+        "length": 18,
+        "offset": 79,
+        "surroundingCode": "    private OrderController orderController;\r\n\r\n    private EmployeeController employeeController;\r\n\r\n    private Employee currentLoggedUser;\r"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Bookstore_Unejsi_Isufaj",
+    "inspectionName": "FieldMayBeFinal"
+  },
+  "hash": "66f8a8c7b1e99d0f686dbaf363783c25744c697925d671136d8be55a240d0fc7"
+},{
+  "tool": "Code Inspection",
+  "category": "Code style issues",
+  "type": "Field may be 'final'",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Field `currentLoggedUser` may be 'final'",
+  "detailsInfo": "Reports fields that can be safely made `final`. All `final` fields have a value and this value does not change, which can make the code easier to reason about.\n\nTo avoid too expensive analysis, this inspection only reports if the field has a `private` modifier\nor it is defined in a local or anonymous class.\nA field can be `final` if:\n\n* It is `static` and initialized once in its declaration or in one `static` initializer.\n* It is non-`static` and initialized once in its declaration, in one instance initializer or in every constructor\n\nAnd it is not modified anywhere else.\n\n**Example:**\n\n\n      public class Person {\n        private String name; // can be final\n\n        Person(String name) {\n          this.name = name;\n        }\n\n        public String getName() {\n          return name;\n        }\n      }\n\nAfter the quick-fix is applied:\n\n\n      public class Person {\n        private final String name;\n\n        Person(String name) {\n          this.name = name;\n        }\n\n        public String getName() {\n          return name;\n        }\n      }\n\n\nUse the \"Annotations\" button to modify the list of annotations that assume implicit field write.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/com/example/javafxtutorial/view/CheckPerformancePageView.java",
+      "language": "JAVA",
+      "line": 38,
+      "offset": 22,
+      "length": 17,
+      "code": {
+        "startLine": 36,
+        "length": 17,
+        "offset": 75,
+        "surroundingCode": "    private EmployeeController employeeController;\r\n\r\n    private Employee currentLoggedUser;\r\n\r\n    private Stage primaryStage;\r"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Bookstore_Unejsi_Isufaj",
+    "inspectionName": "FieldMayBeFinal"
+  },
+  "hash": "db87cacd3cb4fdbe852b52d4b9c88a20d62fdbeb38d5ed16a6009124892e43d9"
+}]}

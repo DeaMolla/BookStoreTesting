@@ -1,0 +1,10 @@
+{
+  "cloud" : {
+    "url" : "https://qodana.cloud/projects/zE07j/reports/qL7vV",
+    "reportId" : "qL7vV",
+    "projectId" : "zE07j",
+    "projectName" : "BookstoreTesting",
+    "host" : "https://qodana.cloud"
+  },
+  "vcs" : { }
+}

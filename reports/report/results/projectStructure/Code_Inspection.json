@@ -1,0 +1,116 @@
+{
+  "modules": [
+    {
+      "name": "Bookstore_Unejsi_Isufaj",
+      "contentEntries": [
+        {
+          "path": "file://$PROJECT_DIR$",
+          "excludePatterns": [],
+          "excludeFolders": [
+            {
+              "path": "file://$PROJECT_DIR$/target",
+              "type": "Exclude",
+              "packagePrefix": ""
+            }
+          ],
+          "sourceFolders": [
+            {
+              "path": "file://$PROJECT_DIR$/src/main/java",
+              "type": "Source",
+              "packagePrefix": ""
+            },
+            {
+              "path": "file://$PROJECT_DIR$/src/main/resources",
+              "type": "Resource",
+              "packagePrefix": ""
+            },
+            {
+              "path": "file://$PROJECT_DIR$/src/test/java",
+              "type": "TestSource",
+              "packagePrefix": ""
+            },
+            {
+              "path": "file://$PROJECT_DIR$/src/test/resources",
+              "type": "TestResource",
+              "packagePrefix": ""
+            }
+          ]
+        }
+      ],
+      "orderEntries": [
+        {
+          "name": "21",
+          "type": "SDK"
+        },
+        {
+          "name": "<Module source>",
+          "type": "Own sources"
+        },
+        {
+          "name": "Maven: org.openjfx:javafx-controls:21-ea+24",
+          "type": "Library"
+        },
+        {
+          "name": "Maven: org.openjfx:javafx-controls:linux:21-ea+24",
+          "type": "Library"
+        },
+        {
+          "name": "Maven: org.openjfx:javafx-graphics:21-ea+24",
+          "type": "Library"
+        },
+        {
+          "name": "Maven: org.openjfx:javafx-graphics:linux:21-ea+24",
+          "type": "Library"
+        },
+        {
+          "name": "Maven: org.openjfx:javafx-base:21-ea+24",
+          "type": "Library"
+        },
+        {
+          "name": "Maven: org.openjfx:javafx-base:linux:21-ea+24",
+          "type": "Library"
+        },
+        {
+          "name": "Maven: org.openjfx:javafx-fxml:21-ea+24",
+          "type": "Library"
+        },
+        {
+          "name": "Maven: org.openjfx:javafx-fxml:linux:21-ea+24",
+          "type": "Library"
+        },
+        {
+          "name": "Maven: org.kordamp.ikonli:ikonli-javafx:12.3.1",
+          "type": "Library"
+        },
+        {
+          "name": "Maven: org.kordamp.ikonli:ikonli-core:12.3.1",
+          "type": "Library"
+        },
+        {
+          "name": "Maven: org.junit.jupiter:junit-jupiter-api:5.9.2",
+          "type": "Library"
+        },
+        {
+          "name": "Maven: org.opentest4j:opentest4j:1.2.0",
+          "type": "Library"
+        },
+        {
+          "name": "Maven: org.junit.platform:junit-platform-commons:1.9.2",
+          "type": "Library"
+        },
+        {
+          "name": "Maven: org.apiguardian:apiguardian-api:1.1.2",
+          "type": "Library"
+        },
+        {
+          "name": "Maven: org.junit.jupiter:junit-jupiter-engine:5.9.2",
+          "type": "Library"
+        },
+        {
+          "name": "Maven: org.junit.platform:junit-platform-engine:1.9.2",
+          "type": "Library"
+        }
+      ]
+    }
+  ]
+}

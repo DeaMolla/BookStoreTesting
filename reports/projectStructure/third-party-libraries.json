@@ -1,0 +1,16 @@
+[
+  {
+    "name": "ikonli-core",
+    "version": "12.3.1",
+    "url": "",
+    "license": "Apache-2.0",
+    "licenseUrl": "http://www.apache.org/licenses/"
+  },
+  {
+    "name": "ikonli-javafx",
+    "version": "12.3.1",
+    "url": "",
+    "license": "Apache-2.0",
+    "licenseUrl": "http://www.apache.org/licenses/"
+  }
+]

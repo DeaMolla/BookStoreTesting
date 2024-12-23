@@ -1,0 +1,6 @@
+version: 1.0
+checks:
+  # Enable or disable specific inspections
+  # Example: disable 'Unused code'
+  - id: UnusedCode
+    enabled: false

@@ -1,0 +1,288 @@
+{
+  "$schema": "https://raw.githubusercontent.com/schemastore/schemastore/master/src/schemas/json/sarif-2.1.0-rtm.5.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "QDJVM",
+          "fullName": "Qodana for JVM",
+          "version": "243.23410",
+          "rules": [],
+          "taxa": [],
+          "language": "en-US",
+          "contents": [
+            "localizedData",
+            "nonLocalizedData"
+          ],
+          "isComprehensive": false
+        },
+        "extensions": []
+      },
+      "invocations": [
+        {
+          "startTimeUtc": "2024-12-23T22:00:58.199869772Z",
+          "exitCode": 0,
+          "executionSuccessful": true
+        }
+      ],
+      "language": "en-US",
+      "versionControlProvenance": [
+        {
+          "properties": {
+            "repoUrl": "",
+            "vcsType": "Git"
+          }
+        }
+      ],
+      "results": [],
+      "automationDetails": {
+        "id": "project/qodana/2024-12-23",
+        "guid": "a562ae2a-70e8-4071-9e31-c68b2aba63a9",
+        "properties": {
+          "jobUrl": "",
+          "analysisKind": "regular"
+        }
+      },
+      "newlineSequences": [
+        "\r\n",
+        "\n"
+      ],
+      "properties": {
+        "qodana.promo.results": [
+          {
+            "ruleId": "FieldMayBeFinal",
+            "kind": "fail",
+            "level": "warning",
+            "message": {
+              "text": "Field 'orderController' may be 'final'",
+              "markdown": "Field `orderController` may be 'final'"
+            },
+            "locations": [
+              {
+                "physicalLocation": {
+                  "artifactLocation": {
+                    "uri": "src/main/java/com/example/javafxtutorial/view/CheckPerformancePageView.java",
+                    "uriBaseId": "SRCROOT"
+                  },
+                  "region": {
+                    "startLine": 34,
+                    "startColumn": 29,
+                    "charOffset": 1107,
+                    "charLength": 15,
+                    "snippet": {
+                      "text": "orderController"
+                    },
+                    "sourceLanguage": "JAVA"
+                  },
+                  "contextRegion": {
+                    "startLine": 32,
+                    "startColumn": 1,
+                    "charOffset": 1036,
+                    "charLength": 142,
+                    "snippet": {
+                      "text": "public class CheckPerformancePageView {\r\n\r\n    private OrderController orderController;\r\n\r\n    private EmployeeController employeeController;\r"
+                    },
+                    "sourceLanguage": "JAVA"
+                  }
+                },
+                "logicalLocations": [
+                  {
+                    "fullyQualifiedName": "Bookstore_Unejsi_Isufaj",
+                    "kind": "module"
+                  }
+                ]
+              }
+            ],
+            "partialFingerprints": {
+              "equalIndicator/v2": "fe3c950b7ca12621",
+              "equalIndicator/v1": "1922910481c068da66f4c67ed8e2dc6cf5e72d42aee4fa4293215b6a6410a6cf"
+            },
+            "properties": {
+              "ideaSeverity": "WARNING",
+              "qodanaSeverity": "High",
+              "tags": [
+                "JAVA"
+              ]
+            }
+          },
+          {
+            "ruleId": "FieldMayBeFinal",
+            "kind": "fail",
+            "level": "warning",
+            "message": {
+              "text": "Field 'primaryStage' may be 'final'",
+              "markdown": "Field `primaryStage` may be 'final'"
+            },
+            "locations": [
+              {
+                "physicalLocation": {
+                  "artifactLocation": {
+                    "uri": "src/main/java/com/example/javafxtutorial/view/CheckPerformancePageView.java",
+                    "uriBaseId": "SRCROOT"
+                  },
+                  "region": {
+                    "startLine": 40,
+                    "startColumn": 19,
+                    "charOffset": 1242,
+                    "charLength": 12,
+                    "snippet": {
+                      "text": "primaryStage"
+                    },
+                    "sourceLanguage": "JAVA"
+                  },
+                  "contextRegion": {
+                    "startLine": 38,
+                    "startColumn": 1,
+                    "charOffset": 1181,
+                    "charLength": 235,
+                    "snippet": {
+                      "text": "    private Employee currentLoggedUser;\r\n\r\n    private Stage primaryStage;\r\n\r\n    public CheckPerformancePageView(OrderController orderController, EmployeeController employeeController, Employee currentLoggedUser, Stage primaryStage){\r"
+                    },
+                    "sourceLanguage": "JAVA"
+                  }
+                },
+                "logicalLocations": [
+                  {
+                    "fullyQualifiedName": "Bookstore_Unejsi_Isufaj",
+                    "kind": "module"
+                  }
+                ]
+              }
+            ],
+            "partialFingerprints": {
+              "equalIndicator/v2": "94851fb71a5502cb",
+              "equalIndicator/v1": "48f9e5558ac3aaaa01a1fc02c36634102c5d3210244114a6fdd17ff8dcb39acd"
+            },
+            "properties": {
+              "ideaSeverity": "WARNING",
+              "qodanaSeverity": "High",
+              "tags": [
+                "JAVA"
+              ]
+            }
+          },
+          {
+            "ruleId": "FieldMayBeFinal",
+            "kind": "fail",
+            "level": "warning",
+            "message": {
+              "text": "Field 'employeeController' may be 'final'",
+              "markdown": "Field `employeeController` may be 'final'"
+            },
+            "locations": [
+              {
+                "physicalLocation": {
+                  "artifactLocation": {
+                    "uri": "src/main/java/com/example/javafxtutorial/view/CheckPerformancePageView.java",
+                    "uriBaseId": "SRCROOT"
+                  },
+                  "region": {
+                    "startLine": 36,
+                    "startColumn": 32,
+                    "charOffset": 1158,
+                    "charLength": 18,
+                    "snippet": {
+                      "text": "employeeController"
+                    },
+                    "sourceLanguage": "JAVA"
+                  },
+                  "contextRegion": {
+                    "startLine": 34,
+                    "startColumn": 1,
+                    "charOffset": 1079,
+                    "charLength": 142,
+                    "snippet": {
+                      "text": "    private OrderController orderController;\r\n\r\n    private EmployeeController employeeController;\r\n\r\n    private Employee currentLoggedUser;\r"
+                    },
+                    "sourceLanguage": "JAVA"
+                  }
+                },
+                "logicalLocations": [
+                  {
+                    "fullyQualifiedName": "Bookstore_Unejsi_Isufaj",
+                    "kind": "module"
+                  }
+                ]
+              }
+            ],
+            "partialFingerprints": {
+              "equalIndicator/v2": "84ea5c410cebf464",
+              "equalIndicator/v1": "66f8a8c7b1e99d0f686dbaf363783c25744c697925d671136d8be55a240d0fc7"
+            },
+            "properties": {
+              "ideaSeverity": "WARNING",
+              "qodanaSeverity": "High",
+              "tags": [
+                "JAVA"
+              ]
+            }
+          },
+          {
+            "ruleId": "FieldMayBeFinal",
+            "kind": "fail",
+            "level": "warning",
+            "message": {
+              "text": "Field 'currentLoggedUser' may be 'final'",
+              "markdown": "Field `currentLoggedUser` may be 'final'"
+            },
+            "locations": [
+              {
+                "physicalLocation": {
+                  "artifactLocation": {
+                    "uri": "src/main/java/com/example/javafxtutorial/view/CheckPerformancePageView.java",
+                    "uriBaseId": "SRCROOT"
+                  },
+                  "region": {
+                    "startLine": 38,
+                    "startColumn": 22,
+                    "charOffset": 1202,
+                    "charLength": 17,
+                    "snippet": {
+                      "text": "currentLoggedUser"
+                    },
+                    "sourceLanguage": "JAVA"
+                  },
+                  "contextRegion": {
+                    "startLine": 36,
+                    "startColumn": 1,
+                    "charOffset": 1127,
+                    "charLength": 129,
+                    "snippet": {
+                      "text": "    private EmployeeController employeeController;\r\n\r\n    private Employee currentLoggedUser;\r\n\r\n    private Stage primaryStage;\r"
+                    },
+                    "sourceLanguage": "JAVA"
+                  }
+                },
+                "logicalLocations": [
+                  {
+                    "fullyQualifiedName": "Bookstore_Unejsi_Isufaj",
+                    "kind": "module"
+                  }
+                ]
+              }
+            ],
+            "partialFingerprints": {
+              "equalIndicator/v2": "2e07eb72c0007cb2",
+              "equalIndicator/v1": "db87cacd3cb4fdbe852b52d4b9c88a20d62fdbeb38d5ed16a6009124892e43d9"
+            },
+            "properties": {
+              "ideaSeverity": "WARNING",
+              "qodanaSeverity": "High",
+              "tags": [
+                "JAVA"
+              ]
+            }
+          }
+        ],
+        "configProfile": "absent",
+        "deviceId": "200820300000000-0000-0000-0000-000000000000",
+        "qodanaNewResultSummary": {
+          "high": 28,
+          "moderate": 2,
+          "total": 30
+        }
+      }
+    }
+  ]
+}

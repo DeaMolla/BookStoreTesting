@@ -1,0 +1,12 @@
+Directory;Absolute Time spent on Inspection Group 'all', s;Percent of Time spent on Inspection Group 'all';Inspections Problem Count in Group 'all';Times Inspection from Group 'all' was Performed
+/data/project;3.97;100.00%;34;6544
+/data/project/src/main;3.82;96.18%;34;6429
+/data/project/src/main/java;3.79;95.41%;34;6343
+/data/project/src/main/java/com/example/javafxtutorial;3.73;93.98%;34;6106
+/data/project/src/main/java/com/example/javafxtutorial/view;1.63;41.03%;17;2107
+/data/project/src/main/java/com/example/javafxtutorial/controller;0.84;21.26%;1;1169
+/data/project/src/main/java/com/example/javafxtutorial/model;0.28;7.08%;0;1177
+/data/project/src/main/java/com/example/javafxtutorial/auxiliary;0.20;5.09%;2;948
+/data/project/src/main/resources/com/example/javafxtutorial;0.03;0.77%;0;86
+/data/project/src/main/resources/com/example/javafxtutorial/bills;0.01;0.13%;0;40
+/data/project/.mvn/wrapper;0.00;0.00%;0;6

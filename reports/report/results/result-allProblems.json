@@ -1,0 +1,931 @@
+{"version":"3","listProblem":[{
+  "tool": "Code Inspection",
+  "category": "Resource management",
+  "type": "AutoCloseable used without 'try'-with-resources",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "'FileInputStream' used without 'try'-with-resources statement",
+  "detailsInfo": "Reports `AutoCloseable` instances which are not used in a try-with-resources statement, also known as *Automatic Resource Management* .\n\n\nThis means that the \"open resource before/in `try`, close in `finally`\" style that had been used before\ntry-with-resources became available, is also reported.\nThis inspection is meant to replace all *opened but not safely closed* inspections when developing in Java 7 and higher.\n\n**Example:**\n\n\n      private static void foo() throws IOException {\n        InputStream profile = Thread.currentThread().getContextClassLoader().getResourceAsStream(\"/someFile\");\n        System.out.println(profile.read());\n      }\n\n\nUse the following options to configure the inspection:\n\n* List subclasses of `AutoCloseable` that do not need to be closed and should be ignored by this inspection.   \n  **Note** : The inspection will still report streams returned from the `java.nio.file.Files` methods `lines()`, `walk()`, `list()` and `find()`, even when `java.util.stream.Stream` is listed to be ignored. These streams contain an associated I/O resource that needs to be closed.\n* List methods returning `AutoCloseable` that should be ignored when called.\n* Whether to ignore an `AutoCloseable` if it is the result of a method call. When this option is enabled, the results of factory methods will also be ignored.\n* Whether the inspection should report if an `AutoCloseable` instance is passed as a method call argument. If this option is enabled, the inspection assumes the resource is closed in the called method. Method calls inside a `finally` block with 'close' in the name and an `AutoCloseable` argument will not be ignored.\n* Whether to ignore method references to constructors of resource classes.\n* Whether to ignore methods that return a resource and whose name starts with 'get'. This can reduce false positives because most of the getters do not transfer the ownership of the resource, and their call sites are not responsible for closing the resource.\n\nThis inspection depends on the Java feature 'Try-with-resources', which is available since Java 7.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/com/example/javafxtutorial/view/AddBookPageView.java",
+      "language": "JAVA",
+      "line": 68,
+      "offset": 54,
+      "length": 15,
+      "code": {
+        "startLine": 66,
+        "length": 15,
+        "offset": 129,
+        "surroundingCode": "                    if (saveFile != null) {\r\n                        try {\r\n                            FileChannel source = new FileInputStream(selectedFile).getChannel();\r\n                            FileChannel destination = new FileOutputStream(saveFile).getChannel();\r\n                            destination.transferFrom(source, 0, source.size());\r"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Bookstore_Unejsi_Isufaj",
+    "inspectionName": "AutoCloseableResource"
+  },
+  "hash": "9b46a594ff55b05232e1c8672d39bbbfe38d77fed4b4cbb49682591e3f70de58"
+},{
+  "tool": "Code Inspection",
+  "category": "Resource management",
+  "type": "AutoCloseable used without 'try'-with-resources",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "'FileOutputStream' used without 'try'-with-resources statement",
+  "detailsInfo": "Reports `AutoCloseable` instances which are not used in a try-with-resources statement, also known as *Automatic Resource Management* .\n\n\nThis means that the \"open resource before/in `try`, close in `finally`\" style that had been used before\ntry-with-resources became available, is also reported.\nThis inspection is meant to replace all *opened but not safely closed* inspections when developing in Java 7 and higher.\n\n**Example:**\n\n\n      private static void foo() throws IOException {\n        InputStream profile = Thread.currentThread().getContextClassLoader().getResourceAsStream(\"/someFile\");\n        System.out.println(profile.read());\n      }\n\n\nUse the following options to configure the inspection:\n\n* List subclasses of `AutoCloseable` that do not need to be closed and should be ignored by this inspection.   \n  **Note** : The inspection will still report streams returned from the `java.nio.file.Files` methods `lines()`, `walk()`, `list()` and `find()`, even when `java.util.stream.Stream` is listed to be ignored. These streams contain an associated I/O resource that needs to be closed.\n* List methods returning `AutoCloseable` that should be ignored when called.\n* Whether to ignore an `AutoCloseable` if it is the result of a method call. When this option is enabled, the results of factory methods will also be ignored.\n* Whether the inspection should report if an `AutoCloseable` instance is passed as a method call argument. If this option is enabled, the inspection assumes the resource is closed in the called method. Method calls inside a `finally` block with 'close' in the name and an `AutoCloseable` argument will not be ignored.\n* Whether to ignore method references to constructors of resource classes.\n* Whether to ignore methods that return a resource and whose name starts with 'get'. This can reduce false positives because most of the getters do not transfer the ownership of the resource, and their call sites are not responsible for closing the resource.\n\nThis inspection depends on the Java feature 'Try-with-resources', which is available since Java 7.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/com/example/javafxtutorial/view/AddBookPageView.java",
+      "language": "JAVA",
+      "line": 69,
+      "offset": 59,
+      "length": 16,
+      "code": {
+        "startLine": 67,
+        "length": 16,
+        "offset": 187,
+        "surroundingCode": "                        try {\r\n                            FileChannel source = new FileInputStream(selectedFile).getChannel();\r\n                            FileChannel destination = new FileOutputStream(saveFile).getChannel();\r\n                            destination.transferFrom(source, 0, source.size());\r\n                            source.close();\r"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Bookstore_Unejsi_Isufaj",
+    "inspectionName": "AutoCloseableResource"
+  },
+  "hash": "f8dd6852e732246478aeadf93dfc92203f64f7f0f28bcc925e39492884fac96d"
+},{
+  "tool": "Code Inspection",
+  "category": "Visibility",
+  "type": "Class is exposed outside of its visibility scope",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Class `Employee` is not exported from module 'com.example.javafxtutorial'",
+  "detailsInfo": "Reports usages of classes in a field or method signature where the class has less visibility than the member that uses it. While legal Java, such members cannot be used outside of the visibility scope of the class type they reference.\n\n**Example:**\n\n\n      public class Parent {\n        public Child getChild() {\n          return new Child();\n        }\n\n        private class Child {}\n      }\n\n\nAdditionally, in Java 9 and higher, a module may hide some of its classes from other modules by not exporting their packages.\nHowever, if a member that is part of the exported API references a non-exported class in its signature,\nsuch a member cannot be used outside of the module.\n\nConfigure the inspection:\n\n* Use the **Report non-exported classes exposed in module API (Java 9+)** option to report module API members that expose non-exported classes.  \n  Note that the language level of the project or module needs to be 9 or higher for this option.\n* Use the **Report non-accessible classes exposed in public API** option to report on public members that expose classes with a smaller visibility scope.\n* Use the **Report private classes exposed in package-local API** option to report on package-local members that expose `private` classes.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/com/example/javafxtutorial/BookStoreApp.java",
+      "language": "JAVA",
+      "line": 38,
+      "offset": 25,
+      "length": 8,
+      "code": {
+        "startLine": 36,
+        "length": 8,
+        "offset": 71,
+        "surroundingCode": "    private Employee currentLoggedEmployee;\r\n\r\n    public BookStoreApp(Employee currentLoggedEmployee) {\r\n        this.currentLoggedEmployee = currentLoggedEmployee;\r\n        System.out.println(currentLoggedEmployee);\r"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Bookstore_Unejsi_Isufaj",
+    "inspectionName": "ClassEscapesItsScope"
+  },
+  "hash": "0f50d8be959f1a05f4e7da3fdcbfa524ee88624c1e9856b035adefb34ac52241"
+},{
+  "tool": "Code Inspection",
+  "category": "Visibility",
+  "type": "Class is exposed outside of its visibility scope",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Class `Order` is not exported from module 'com.example.javafxtutorial'",
+  "detailsInfo": "Reports usages of classes in a field or method signature where the class has less visibility than the member that uses it. While legal Java, such members cannot be used outside of the visibility scope of the class type they reference.\n\n**Example:**\n\n\n      public class Parent {\n        public Child getChild() {\n          return new Child();\n        }\n\n        private class Child {}\n      }\n\n\nAdditionally, in Java 9 and higher, a module may hide some of its classes from other modules by not exporting their packages.\nHowever, if a member that is part of the exported API references a non-exported class in its signature,\nsuch a member cannot be used outside of the module.\n\nConfigure the inspection:\n\n* Use the **Report non-exported classes exposed in module API (Java 9+)** option to report module API members that expose non-exported classes.  \n  Note that the language level of the project or module needs to be 9 or higher for this option.\n* Use the **Report non-accessible classes exposed in public API** option to report on public members that expose classes with a smaller visibility scope.\n* Use the **Report private classes exposed in package-local API** option to report on package-local members that expose `private` classes.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/com/example/javafxtutorial/auxiliary/PrintWindow.java",
+      "language": "JAVA",
+      "line": 29,
+      "offset": 24,
+      "length": 5,
+      "code": {
+        "startLine": 27,
+        "length": 5,
+        "offset": 51,
+        "surroundingCode": "    private Order order;\r\n\r\n    public PrintWindow(Order order) {\r\n        this.order = order;\r\n    }\r"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Bookstore_Unejsi_Isufaj",
+    "inspectionName": "ClassEscapesItsScope"
+  },
+  "hash": "174a5190c470ec14c3eb059b058cd60df658cebe97c2fbf775553b71112cc62e"
+},{
+  "tool": "Code Inspection",
+  "category": "Visibility",
+  "type": "Class is exposed outside of its visibility scope",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Class `CartItem` is not exported from module 'com.example.javafxtutorial'",
+  "detailsInfo": "Reports usages of classes in a field or method signature where the class has less visibility than the member that uses it. While legal Java, such members cannot be used outside of the visibility scope of the class type they reference.\n\n**Example:**\n\n\n      public class Parent {\n        public Child getChild() {\n          return new Child();\n        }\n\n        private class Child {}\n      }\n\n\nAdditionally, in Java 9 and higher, a module may hide some of its classes from other modules by not exporting their packages.\nHowever, if a member that is part of the exported API references a non-exported class in its signature,\nsuch a member cannot be used outside of the module.\n\nConfigure the inspection:\n\n* Use the **Report non-exported classes exposed in module API (Java 9+)** option to report module API members that expose non-exported classes.  \n  Note that the language level of the project or module needs to be 9 or higher for this option.\n* Use the **Report non-accessible classes exposed in public API** option to report on public members that expose classes with a smaller visibility scope.\n* Use the **Report private classes exposed in package-local API** option to report on package-local members that expose `private` classes.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/com/example/javafxtutorial/auxiliary/BooksSoldWindow.java",
+      "language": "JAVA",
+      "line": 31,
+      "offset": 71,
+      "length": 8,
+      "code": {
+        "startLine": 29,
+        "length": 8,
+        "offset": 74,
+        "surroundingCode": "\r\n\r\n    public BooksSoldWindow(int quantity, double totalPrice, ArrayList<CartItem> cartItems){\r\n        totalCartQuantityLabel = new Label(\"Total Quantity: \" + quantity);\r\n        totalCartPriceLabel = new Label(\"Total Price: \" + totalPrice + \"$\");\r"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Bookstore_Unejsi_Isufaj",
+    "inspectionName": "ClassEscapesItsScope"
+  },
+  "hash": "259ad2fd884339a5a026930a95b92c4f02782043e04b4a2d0e9cee9d270a2112"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Constant values",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Condition `saveFile != null` is always `true`",
+  "detailsInfo": "Reports expressions and conditions that always produce the same result, like true, false, null, or zero. Such expressions could be replaced with the corresponding constant value. Very often though they signal about a bug in the code.\n\nExamples:\n\n      // always true\n      // root cause: || is used instead of &&\n      if (x > 0 || x < 10) {}\n\n      System.out.println(str.trim());\n      // always false\n      // root cause: variable was dereferenced before null-check\n      if (str == null) {}\n\n\nThe inspection behavior may be controlled by a number of annotations, such as\n[nullability](https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html) annotations,\n[@Contract](https://www.jetbrains.com/help/idea/contract-annotations.html) annotation,\n`@Range` annotation and so on.\n\nConfigure the inspection:\n\n* Use the **Don't report assertions with condition statically proven to be always true** option to avoid reporting assertions that were statically proven to be always true. This also includes conditions like `if (alwaysFalseCondition) throw new IllegalArgumentException();`.\n* Use the **Ignore assert statements** option to control how the inspection treats `assert` statements. By default, the option is disabled, which means that the assertions are assumed to be executed (-ea mode). If the option is enabled, the assertions will be completely ignored (-da mode).\n* Use the **Warn when constant is stored in variable** option to display warnings when variable is used, whose value is known to be a constant.\n\n\nBefore IntelliJ IDEA 2022.3, this inspection was part of \"Constant Conditions \\& Exceptions\" inspection. Now, it split into two inspections:\n\"Constant Values\" and \"Nullability and data flow problems\".",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/com/example/javafxtutorial/view/AddBookPageView.java",
+      "language": "JAVA",
+      "line": 66,
+      "offset": 25,
+      "length": 16,
+      "code": {
+        "startLine": 64,
+        "length": 16,
+        "offset": 148,
+        "surroundingCode": "                    File saveFile = new File(\"src/main/resources/com/example/javafxtutorial/\" + selectedFile.getName());\r\n\r\n                    if (saveFile != null) {\r\n                        try {\r\n                            FileChannel source = new FileInputStream(selectedFile).getChannel();\r"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Bookstore_Unejsi_Isufaj",
+    "inspectionName": "ConstantValue"
+  },
+  "hash": "c1bb3cd0349a317cf44306e5b32f6f4eff89e4b83b4a8731ff54723f2c17405b"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Nullability and data flow problems",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Method invocation `toExternalForm` may produce `NullPointerException`",
+  "detailsInfo": "Reports code constructs that always violate nullability contracts, may throw exceptions, or are just redundant, based on data flow analysis.\n\nExamples:\n\n    if (array.length < index) {\n      System.out.println(array[index]);\n    } // Array index is always out of bounds\n\n    if (str == null) System.out.println(\"str is null\");\n    System.out.println(str.trim());\n    // the last statement may throw an NPE\n\n    @NotNull\n    Integer square(@Nullable Integer input) {\n        // the method contract is violated\n        return input == null ? null : input * input;\n    }\n\n\nThe inspection behavior may be controlled by a number of annotations, such as\n[nullability](https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html) annotations,\n[@Contract](https://www.jetbrains.com/help/idea/contract-annotations.html) annotation,\n`@Range` annotation and so on.\n\nConfigure the inspection:\n\n* Use the **Suggest @Nullable annotation for methods/fields/parameters where nullable values are used** option to warn when a nullable value is passed as an argument to a method with a non-annotated parameter, stored into non-annotated field, or returned from a non-annotated method. In this case, the inspection will suggest propagating the `@Nullable` annotation. You can also configure nullability annotations using the **Configure Annotations** button.\n* Use the **Treat non-annotated members and parameters as @Nullable** option to assume that non-annotated members can be null, so they must not be used in non-null context.\n* Use the **Report not-null required parameter with null-literal argument usages** option to report method parameters that cannot be null (e.g. immediately dereferenced in the method body), but there are call sites where a `null` literal is passed.\n* Use the **Report nullable methods that always return a non-null value** option to report methods that are annotated as `@Nullable`, but always return non-null value. In this case, it's suggested that you change the annotation to `@NotNull`.\n* Use the **Ignore assert statements** option to control how the inspection treats `assert` statements. By default, the option is disabled, which means that the assertions are assumed to be executed (-ea mode). If the option is enabled, the assertions will be completely ignored (-da mode).\n* Use the **Report problems that happen only on some code paths** option to control whether to report problems that may happen only on some code path. If this option is disabled, warnings like *exception is possible* will not be reported. The inspection will report only warnings like *exception will definitely occur*. This mode may greatly reduce the number of false-positives, especially if the code is not consistently annotated with nullability and contract annotations. That is why it can be useful for finding the most important problems in legacy code bases.\n\n\nBefore IntelliJ IDEA 2022.3, this inspection was part of the \"Constant Conditions \\& Exceptions\" inspection.\nNow, it is split into two inspections:\n\"Constant Values\" and \"Nullability and data flow problems\".",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/com/example/javafxtutorial/BookStoreApp.java",
+      "language": "JAVA",
+      "line": 194,
+      "offset": 87,
+      "length": 14,
+      "code": {
+        "startLine": 192,
+        "length": 14,
+        "offset": 162,
+        "surroundingCode": "        checkPerformanceButton.setFont(Font.font(\"Berlin Sans FB\", 18));\r\n\r\n        Image statisticsIcon = new Image(getClass().getResource(\"statisticsIcon.png\").toExternalForm());\r\n        ImageView statisticsImageView = new ImageView(statisticsIcon);\r\n        Label statisticsButton = new Label(\"Statistics\", statisticsImageView);\r"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Bookstore_Unejsi_Isufaj",
+    "inspectionName": "DataFlowIssue"
+  },
+  "hash": "221fac4e8ef557a1637ac6342cc5541dc13091cfd6e6f2ef3c9b6d38c509bfbe"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Nullability and data flow problems",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Method invocation `toExternalForm` may produce `NullPointerException`",
+  "detailsInfo": "Reports code constructs that always violate nullability contracts, may throw exceptions, or are just redundant, based on data flow analysis.\n\nExamples:\n\n    if (array.length < index) {\n      System.out.println(array[index]);\n    } // Array index is always out of bounds\n\n    if (str == null) System.out.println(\"str is null\");\n    System.out.println(str.trim());\n    // the last statement may throw an NPE\n\n    @NotNull\n    Integer square(@Nullable Integer input) {\n        // the method contract is violated\n        return input == null ? null : input * input;\n    }\n\n\nThe inspection behavior may be controlled by a number of annotations, such as\n[nullability](https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html) annotations,\n[@Contract](https://www.jetbrains.com/help/idea/contract-annotations.html) annotation,\n`@Range` annotation and so on.\n\nConfigure the inspection:\n\n* Use the **Suggest @Nullable annotation for methods/fields/parameters where nullable values are used** option to warn when a nullable value is passed as an argument to a method with a non-annotated parameter, stored into non-annotated field, or returned from a non-annotated method. In this case, the inspection will suggest propagating the `@Nullable` annotation. You can also configure nullability annotations using the **Configure Annotations** button.\n* Use the **Treat non-annotated members and parameters as @Nullable** option to assume that non-annotated members can be null, so they must not be used in non-null context.\n* Use the **Report not-null required parameter with null-literal argument usages** option to report method parameters that cannot be null (e.g. immediately dereferenced in the method body), but there are call sites where a `null` literal is passed.\n* Use the **Report nullable methods that always return a non-null value** option to report methods that are annotated as `@Nullable`, but always return non-null value. In this case, it's suggested that you change the annotation to `@NotNull`.\n* Use the **Ignore assert statements** option to control how the inspection treats `assert` statements. By default, the option is disabled, which means that the assertions are assumed to be executed (-ea mode). If the option is enabled, the assertions will be completely ignored (-da mode).\n* Use the **Report problems that happen only on some code paths** option to control whether to report problems that may happen only on some code path. If this option is disabled, warnings like *exception is possible* will not be reported. The inspection will report only warnings like *exception will definitely occur*. This mode may greatly reduce the number of false-positives, especially if the code is not consistently annotated with nullability and contract annotations. That is why it can be useful for finding the most important problems in legacy code bases.\n\n\nBefore IntelliJ IDEA 2022.3, this inspection was part of the \"Constant Conditions \\& Exceptions\" inspection.\nNow, it is split into two inspections:\n\"Constant Values\" and \"Nullability and data flow problems\".",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/com/example/javafxtutorial/LoginPage.java",
+      "language": "JAVA",
+      "line": 31,
+      "offset": 68,
+      "length": 14,
+      "code": {
+        "startLine": 29,
+        "length": 14,
+        "offset": 132,
+        "surroundingCode": "        RoleController roleController = new RoleController();\r\n\r\n        Image image = new Image(getClass().getResource(\"logo.png\").toExternalForm());\r\n        ImageView imageView = new ImageView(image);\r\n\r"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Bookstore_Unejsi_Isufaj",
+    "inspectionName": "DataFlowIssue"
+  },
+  "hash": "2395d00408f1505c62b19ae827b377d22a4786698b3202add526bc31417fdaaf"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Nullability and data flow problems",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Method invocation `toExternalForm` may produce `NullPointerException`",
+  "detailsInfo": "Reports code constructs that always violate nullability contracts, may throw exceptions, or are just redundant, based on data flow analysis.\n\nExamples:\n\n    if (array.length < index) {\n      System.out.println(array[index]);\n    } // Array index is always out of bounds\n\n    if (str == null) System.out.println(\"str is null\");\n    System.out.println(str.trim());\n    // the last statement may throw an NPE\n\n    @NotNull\n    Integer square(@Nullable Integer input) {\n        // the method contract is violated\n        return input == null ? null : input * input;\n    }\n\n\nThe inspection behavior may be controlled by a number of annotations, such as\n[nullability](https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html) annotations,\n[@Contract](https://www.jetbrains.com/help/idea/contract-annotations.html) annotation,\n`@Range` annotation and so on.\n\nConfigure the inspection:\n\n* Use the **Suggest @Nullable annotation for methods/fields/parameters where nullable values are used** option to warn when a nullable value is passed as an argument to a method with a non-annotated parameter, stored into non-annotated field, or returned from a non-annotated method. In this case, the inspection will suggest propagating the `@Nullable` annotation. You can also configure nullability annotations using the **Configure Annotations** button.\n* Use the **Treat non-annotated members and parameters as @Nullable** option to assume that non-annotated members can be null, so they must not be used in non-null context.\n* Use the **Report not-null required parameter with null-literal argument usages** option to report method parameters that cannot be null (e.g. immediately dereferenced in the method body), but there are call sites where a `null` literal is passed.\n* Use the **Report nullable methods that always return a non-null value** option to report methods that are annotated as `@Nullable`, but always return non-null value. In this case, it's suggested that you change the annotation to `@NotNull`.\n* Use the **Ignore assert statements** option to control how the inspection treats `assert` statements. By default, the option is disabled, which means that the assertions are assumed to be executed (-ea mode). If the option is enabled, the assertions will be completely ignored (-da mode).\n* Use the **Report problems that happen only on some code paths** option to control whether to report problems that may happen only on some code path. If this option is disabled, warnings like *exception is possible* will not be reported. The inspection will report only warnings like *exception will definitely occur*. This mode may greatly reduce the number of false-positives, especially if the code is not consistently annotated with nullability and contract annotations. That is why it can be useful for finding the most important problems in legacy code bases.\n\n\nBefore IntelliJ IDEA 2022.3, this inspection was part of the \"Constant Conditions \\& Exceptions\" inspection.\nNow, it is split into two inspections:\n\"Constant Values\" and \"Nullability and data flow problems\".",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/com/example/javafxtutorial/BookStoreApp.java",
+      "language": "JAVA",
+      "line": 189,
+      "offset": 99,
+      "length": 14,
+      "code": {
+        "startLine": 187,
+        "length": 14,
+        "offset": 102,
+        "surroundingCode": "\r\n\r\n        Image checkPerformanceIcon = new Image(getClass().getResource(\"checkPerformanceIcon.png\").toExternalForm());\r\n        ImageView checkPerformanceImageView = new ImageView(checkPerformanceIcon);\r\n        Label checkPerformanceButton = new Label(\"Check Performance\", checkPerformanceImageView);\r"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Bookstore_Unejsi_Isufaj",
+    "inspectionName": "DataFlowIssue"
+  },
+  "hash": "5ab15dab923810fed0ed7aed434a842a05eda97893a6e1416dad58719f56ea7c"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Nullability and data flow problems",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Method invocation `toExternalForm` may produce `NullPointerException`",
+  "detailsInfo": "Reports code constructs that always violate nullability contracts, may throw exceptions, or are just redundant, based on data flow analysis.\n\nExamples:\n\n    if (array.length < index) {\n      System.out.println(array[index]);\n    } // Array index is always out of bounds\n\n    if (str == null) System.out.println(\"str is null\");\n    System.out.println(str.trim());\n    // the last statement may throw an NPE\n\n    @NotNull\n    Integer square(@Nullable Integer input) {\n        // the method contract is violated\n        return input == null ? null : input * input;\n    }\n\n\nThe inspection behavior may be controlled by a number of annotations, such as\n[nullability](https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html) annotations,\n[@Contract](https://www.jetbrains.com/help/idea/contract-annotations.html) annotation,\n`@Range` annotation and so on.\n\nConfigure the inspection:\n\n* Use the **Suggest @Nullable annotation for methods/fields/parameters where nullable values are used** option to warn when a nullable value is passed as an argument to a method with a non-annotated parameter, stored into non-annotated field, or returned from a non-annotated method. In this case, the inspection will suggest propagating the `@Nullable` annotation. You can also configure nullability annotations using the **Configure Annotations** button.\n* Use the **Treat non-annotated members and parameters as @Nullable** option to assume that non-annotated members can be null, so they must not be used in non-null context.\n* Use the **Report not-null required parameter with null-literal argument usages** option to report method parameters that cannot be null (e.g. immediately dereferenced in the method body), but there are call sites where a `null` literal is passed.\n* Use the **Report nullable methods that always return a non-null value** option to report methods that are annotated as `@Nullable`, but always return non-null value. In this case, it's suggested that you change the annotation to `@NotNull`.\n* Use the **Ignore assert statements** option to control how the inspection treats `assert` statements. By default, the option is disabled, which means that the assertions are assumed to be executed (-ea mode). If the option is enabled, the assertions will be completely ignored (-da mode).\n* Use the **Report problems that happen only on some code paths** option to control whether to report problems that may happen only on some code path. If this option is disabled, warnings like *exception is possible* will not be reported. The inspection will report only warnings like *exception will definitely occur*. This mode may greatly reduce the number of false-positives, especially if the code is not consistently annotated with nullability and contract annotations. That is why it can be useful for finding the most important problems in legacy code bases.\n\n\nBefore IntelliJ IDEA 2022.3, this inspection was part of the \"Constant Conditions \\& Exceptions\" inspection.\nNow, it is split into two inspections:\n\"Constant Values\" and \"Nullability and data flow problems\".",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/com/example/javafxtutorial/BookStoreApp.java",
+      "language": "JAVA",
+      "line": 177,
+      "offset": 81,
+      "length": 14,
+      "code": {
+        "startLine": 175,
+        "length": 14,
+        "offset": 84,
+        "surroundingCode": "\r\n\r\n        Image addBookIcon = new Image(getClass().getResource(\"addBookIcon.png\").toExternalForm());\r\n        ImageView addBookIconImageView = new ImageView(addBookIcon);\r\n        Label addBookButton = new Label(\"Add Book\", addBookIconImageView);\r"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Bookstore_Unejsi_Isufaj",
+    "inspectionName": "DataFlowIssue"
+  },
+  "hash": "5c616aad71190391b020aaa7925fae6905c2e76c8475005ef10bc1eb457af966"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Nullability and data flow problems",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Method invocation `toExternalForm` may produce `NullPointerException`",
+  "detailsInfo": "Reports code constructs that always violate nullability contracts, may throw exceptions, or are just redundant, based on data flow analysis.\n\nExamples:\n\n    if (array.length < index) {\n      System.out.println(array[index]);\n    } // Array index is always out of bounds\n\n    if (str == null) System.out.println(\"str is null\");\n    System.out.println(str.trim());\n    // the last statement may throw an NPE\n\n    @NotNull\n    Integer square(@Nullable Integer input) {\n        // the method contract is violated\n        return input == null ? null : input * input;\n    }\n\n\nThe inspection behavior may be controlled by a number of annotations, such as\n[nullability](https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html) annotations,\n[@Contract](https://www.jetbrains.com/help/idea/contract-annotations.html) annotation,\n`@Range` annotation and so on.\n\nConfigure the inspection:\n\n* Use the **Suggest @Nullable annotation for methods/fields/parameters where nullable values are used** option to warn when a nullable value is passed as an argument to a method with a non-annotated parameter, stored into non-annotated field, or returned from a non-annotated method. In this case, the inspection will suggest propagating the `@Nullable` annotation. You can also configure nullability annotations using the **Configure Annotations** button.\n* Use the **Treat non-annotated members and parameters as @Nullable** option to assume that non-annotated members can be null, so they must not be used in non-null context.\n* Use the **Report not-null required parameter with null-literal argument usages** option to report method parameters that cannot be null (e.g. immediately dereferenced in the method body), but there are call sites where a `null` literal is passed.\n* Use the **Report nullable methods that always return a non-null value** option to report methods that are annotated as `@Nullable`, but always return non-null value. In this case, it's suggested that you change the annotation to `@NotNull`.\n* Use the **Ignore assert statements** option to control how the inspection treats `assert` statements. By default, the option is disabled, which means that the assertions are assumed to be executed (-ea mode). If the option is enabled, the assertions will be completely ignored (-da mode).\n* Use the **Report problems that happen only on some code paths** option to control whether to report problems that may happen only on some code path. If this option is disabled, warnings like *exception is possible* will not be reported. The inspection will report only warnings like *exception will definitely occur*. This mode may greatly reduce the number of false-positives, especially if the code is not consistently annotated with nullability and contract annotations. That is why it can be useful for finding the most important problems in legacy code bases.\n\n\nBefore IntelliJ IDEA 2022.3, this inspection was part of the \"Constant Conditions \\& Exceptions\" inspection.\nNow, it is split into two inspections:\n\"Constant Values\" and \"Nullability and data flow problems\".",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/com/example/javafxtutorial/BookStoreApp.java",
+      "language": "JAVA",
+      "line": 166,
+      "offset": 75,
+      "length": 14,
+      "code": {
+        "startLine": 164,
+        "length": 14,
+        "offset": 112,
+        "surroundingCode": "        sidebar.setPrefWidth(200);\r\n\r\n        Image homeIcon = new Image(getClass().getResource(\"homeIcon.png\").toExternalForm());\r\n        ImageView homeIconImageView = new ImageView(homeIcon);\r\n        Label homeButton = new Label(\"Home\", homeIconImageView);\r"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Bookstore_Unejsi_Isufaj",
+    "inspectionName": "DataFlowIssue"
+  },
+  "hash": "71e4d742492ebcfbbc995fa2b98c7e8c3e604afdc4cb5599fac78bdf0b5afd59"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Nullability and data flow problems",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Argument `getClass().getResourceAsStream(\"/com/example/javafxtutorial/\" + roleNameForImage)` might be null",
+  "detailsInfo": "Reports code constructs that always violate nullability contracts, may throw exceptions, or are just redundant, based on data flow analysis.\n\nExamples:\n\n    if (array.length < index) {\n      System.out.println(array[index]);\n    } // Array index is always out of bounds\n\n    if (str == null) System.out.println(\"str is null\");\n    System.out.println(str.trim());\n    // the last statement may throw an NPE\n\n    @NotNull\n    Integer square(@Nullable Integer input) {\n        // the method contract is violated\n        return input == null ? null : input * input;\n    }\n\n\nThe inspection behavior may be controlled by a number of annotations, such as\n[nullability](https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html) annotations,\n[@Contract](https://www.jetbrains.com/help/idea/contract-annotations.html) annotation,\n`@Range` annotation and so on.\n\nConfigure the inspection:\n\n* Use the **Suggest @Nullable annotation for methods/fields/parameters where nullable values are used** option to warn when a nullable value is passed as an argument to a method with a non-annotated parameter, stored into non-annotated field, or returned from a non-annotated method. In this case, the inspection will suggest propagating the `@Nullable` annotation. You can also configure nullability annotations using the **Configure Annotations** button.\n* Use the **Treat non-annotated members and parameters as @Nullable** option to assume that non-annotated members can be null, so they must not be used in non-null context.\n* Use the **Report not-null required parameter with null-literal argument usages** option to report method parameters that cannot be null (e.g. immediately dereferenced in the method body), but there are call sites where a `null` literal is passed.\n* Use the **Report nullable methods that always return a non-null value** option to report methods that are annotated as `@Nullable`, but always return non-null value. In this case, it's suggested that you change the annotation to `@NotNull`.\n* Use the **Ignore assert statements** option to control how the inspection treats `assert` statements. By default, the option is disabled, which means that the assertions are assumed to be executed (-ea mode). If the option is enabled, the assertions will be completely ignored (-da mode).\n* Use the **Report problems that happen only on some code paths** option to control whether to report problems that may happen only on some code path. If this option is disabled, warnings like *exception is possible* will not be reported. The inspection will report only warnings like *exception will definitely occur*. This mode may greatly reduce the number of false-positives, especially if the code is not consistently annotated with nullability and contract annotations. That is why it can be useful for finding the most important problems in legacy code bases.\n\n\nBefore IntelliJ IDEA 2022.3, this inspection was part of the \"Constant Conditions \\& Exceptions\" inspection.\nNow, it is split into two inspections:\n\"Constant Values\" and \"Nullability and data flow problems\".",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/com/example/javafxtutorial/view/CheckPerformancePageView.java",
+      "language": "JAVA",
+      "line": 201,
+      "offset": 59,
+      "length": 81,
+      "code": {
+        "startLine": 199,
+        "length": 81,
+        "offset": 132,
+        "surroundingCode": "            roleNameForImage = \"administratorPrfpBigger.png\";\r\n        }\r\n        ImageView roleImageView = new ImageView(new Image(getClass().getResourceAsStream(\"/com/example/javafxtutorial/\" + roleNameForImage)));\r\n        roleImageView.setOpacity(0.8);\r\n\r"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Bookstore_Unejsi_Isufaj",
+    "inspectionName": "DataFlowIssue"
+  },
+  "hash": "84659596314d28c449ae71712e2e176c9d9bbfbe39abe9f001adcfc46a11c6a4"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Nullability and data flow problems",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Method invocation `toExternalForm` may produce `NullPointerException`",
+  "detailsInfo": "Reports code constructs that always violate nullability contracts, may throw exceptions, or are just redundant, based on data flow analysis.\n\nExamples:\n\n    if (array.length < index) {\n      System.out.println(array[index]);\n    } // Array index is always out of bounds\n\n    if (str == null) System.out.println(\"str is null\");\n    System.out.println(str.trim());\n    // the last statement may throw an NPE\n\n    @NotNull\n    Integer square(@Nullable Integer input) {\n        // the method contract is violated\n        return input == null ? null : input * input;\n    }\n\n\nThe inspection behavior may be controlled by a number of annotations, such as\n[nullability](https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html) annotations,\n[@Contract](https://www.jetbrains.com/help/idea/contract-annotations.html) annotation,\n`@Range` annotation and so on.\n\nConfigure the inspection:\n\n* Use the **Suggest @Nullable annotation for methods/fields/parameters where nullable values are used** option to warn when a nullable value is passed as an argument to a method with a non-annotated parameter, stored into non-annotated field, or returned from a non-annotated method. In this case, the inspection will suggest propagating the `@Nullable` annotation. You can also configure nullability annotations using the **Configure Annotations** button.\n* Use the **Treat non-annotated members and parameters as @Nullable** option to assume that non-annotated members can be null, so they must not be used in non-null context.\n* Use the **Report not-null required parameter with null-literal argument usages** option to report method parameters that cannot be null (e.g. immediately dereferenced in the method body), but there are call sites where a `null` literal is passed.\n* Use the **Report nullable methods that always return a non-null value** option to report methods that are annotated as `@Nullable`, but always return non-null value. In this case, it's suggested that you change the annotation to `@NotNull`.\n* Use the **Ignore assert statements** option to control how the inspection treats `assert` statements. By default, the option is disabled, which means that the assertions are assumed to be executed (-ea mode). If the option is enabled, the assertions will be completely ignored (-da mode).\n* Use the **Report problems that happen only on some code paths** option to control whether to report problems that may happen only on some code path. If this option is disabled, warnings like *exception is possible* will not be reported. The inspection will report only warnings like *exception will definitely occur*. This mode may greatly reduce the number of false-positives, especially if the code is not consistently annotated with nullability and contract annotations. That is why it can be useful for finding the most important problems in legacy code bases.\n\n\nBefore IntelliJ IDEA 2022.3, this inspection was part of the \"Constant Conditions \\& Exceptions\" inspection.\nNow, it is split into two inspections:\n\"Constant Values\" and \"Nullability and data flow problems\".",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/com/example/javafxtutorial/BookStoreApp.java",
+      "language": "JAVA",
+      "line": 183,
+      "offset": 83,
+      "length": 14,
+      "code": {
+        "startLine": 181,
+        "length": 14,
+        "offset": 86,
+        "surroundingCode": "\r\n\r\n        Image editBookIcon = new Image(getClass().getResource(\"editBookIcon.png\").toExternalForm());\r\n        ImageView editBookIconImageView = new ImageView(editBookIcon);\r\n        Label editBookButton = new Label(\"Edit Books\", editBookIconImageView);\r"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Bookstore_Unejsi_Isufaj",
+    "inspectionName": "DataFlowIssue"
+  },
+  "hash": "905b8e79851d6aa4e4e1b8c4da4d958b63e7d8aaa1684380e16ed21e4ce45080"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Nullability and data flow problems",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Method invocation `toExternalForm` may produce `NullPointerException`",
+  "detailsInfo": "Reports code constructs that always violate nullability contracts, may throw exceptions, or are just redundant, based on data flow analysis.\n\nExamples:\n\n    if (array.length < index) {\n      System.out.println(array[index]);\n    } // Array index is always out of bounds\n\n    if (str == null) System.out.println(\"str is null\");\n    System.out.println(str.trim());\n    // the last statement may throw an NPE\n\n    @NotNull\n    Integer square(@Nullable Integer input) {\n        // the method contract is violated\n        return input == null ? null : input * input;\n    }\n\n\nThe inspection behavior may be controlled by a number of annotations, such as\n[nullability](https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html) annotations,\n[@Contract](https://www.jetbrains.com/help/idea/contract-annotations.html) annotation,\n`@Range` annotation and so on.\n\nConfigure the inspection:\n\n* Use the **Suggest @Nullable annotation for methods/fields/parameters where nullable values are used** option to warn when a nullable value is passed as an argument to a method with a non-annotated parameter, stored into non-annotated field, or returned from a non-annotated method. In this case, the inspection will suggest propagating the `@Nullable` annotation. You can also configure nullability annotations using the **Configure Annotations** button.\n* Use the **Treat non-annotated members and parameters as @Nullable** option to assume that non-annotated members can be null, so they must not be used in non-null context.\n* Use the **Report not-null required parameter with null-literal argument usages** option to report method parameters that cannot be null (e.g. immediately dereferenced in the method body), but there are call sites where a `null` literal is passed.\n* Use the **Report nullable methods that always return a non-null value** option to report methods that are annotated as `@Nullable`, but always return non-null value. In this case, it's suggested that you change the annotation to `@NotNull`.\n* Use the **Ignore assert statements** option to control how the inspection treats `assert` statements. By default, the option is disabled, which means that the assertions are assumed to be executed (-ea mode). If the option is enabled, the assertions will be completely ignored (-da mode).\n* Use the **Report problems that happen only on some code paths** option to control whether to report problems that may happen only on some code path. If this option is disabled, warnings like *exception is possible* will not be reported. The inspection will report only warnings like *exception will definitely occur*. This mode may greatly reduce the number of false-positives, especially if the code is not consistently annotated with nullability and contract annotations. That is why it can be useful for finding the most important problems in legacy code bases.\n\n\nBefore IntelliJ IDEA 2022.3, this inspection was part of the \"Constant Conditions \\& Exceptions\" inspection.\nNow, it is split into two inspections:\n\"Constant Values\" and \"Nullability and data flow problems\".",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/com/example/javafxtutorial/BookStoreApp.java",
+      "language": "JAVA",
+      "line": 210,
+      "offset": 92,
+      "length": 14,
+      "code": {
+        "startLine": 208,
+        "length": 14,
+        "offset": 95,
+        "surroundingCode": "\r\n\r\n        Image managePermissionsIcon = new Image(getClass().getResource(\"securityIcon.png\").toExternalForm());\r\n        ImageView managePermissionsImageView = new ImageView(managePermissionsIcon);\r\n        Label managePermissionsButton = new Label(\"Manage Permissions\", managePermissionsImageView);\r"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Bookstore_Unejsi_Isufaj",
+    "inspectionName": "DataFlowIssue"
+  },
+  "hash": "9c570d08e86fb83b41ae4bf5ae95dab8c51f73d107e4704598f3eca1116111c8"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Nullability and data flow problems",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Argument `getClass().getResourceAsStream(\"/com/example/javafxtutorial/\" + b.getImagePath())` might be null",
+  "detailsInfo": "Reports code constructs that always violate nullability contracts, may throw exceptions, or are just redundant, based on data flow analysis.\n\nExamples:\n\n    if (array.length < index) {\n      System.out.println(array[index]);\n    } // Array index is always out of bounds\n\n    if (str == null) System.out.println(\"str is null\");\n    System.out.println(str.trim());\n    // the last statement may throw an NPE\n\n    @NotNull\n    Integer square(@Nullable Integer input) {\n        // the method contract is violated\n        return input == null ? null : input * input;\n    }\n\n\nThe inspection behavior may be controlled by a number of annotations, such as\n[nullability](https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html) annotations,\n[@Contract](https://www.jetbrains.com/help/idea/contract-annotations.html) annotation,\n`@Range` annotation and so on.\n\nConfigure the inspection:\n\n* Use the **Suggest @Nullable annotation for methods/fields/parameters where nullable values are used** option to warn when a nullable value is passed as an argument to a method with a non-annotated parameter, stored into non-annotated field, or returned from a non-annotated method. In this case, the inspection will suggest propagating the `@Nullable` annotation. You can also configure nullability annotations using the **Configure Annotations** button.\n* Use the **Treat non-annotated members and parameters as @Nullable** option to assume that non-annotated members can be null, so they must not be used in non-null context.\n* Use the **Report not-null required parameter with null-literal argument usages** option to report method parameters that cannot be null (e.g. immediately dereferenced in the method body), but there are call sites where a `null` literal is passed.\n* Use the **Report nullable methods that always return a non-null value** option to report methods that are annotated as `@Nullable`, but always return non-null value. In this case, it's suggested that you change the annotation to `@NotNull`.\n* Use the **Ignore assert statements** option to control how the inspection treats `assert` statements. By default, the option is disabled, which means that the assertions are assumed to be executed (-ea mode). If the option is enabled, the assertions will be completely ignored (-da mode).\n* Use the **Report problems that happen only on some code paths** option to control whether to report problems that may happen only on some code path. If this option is disabled, warnings like *exception is possible* will not be reported. The inspection will report only warnings like *exception will definitely occur*. This mode may greatly reduce the number of false-positives, especially if the code is not consistently annotated with nullability and contract annotations. That is why it can be useful for finding the most important problems in legacy code bases.\n\n\nBefore IntelliJ IDEA 2022.3, this inspection was part of the \"Constant Conditions \\& Exceptions\" inspection.\nNow, it is split into two inspections:\n\"Constant Values\" and \"Nullability and data flow problems\".",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/com/example/javafxtutorial/view/StatisticsPageView.java",
+      "language": "JAVA",
+      "line": 170,
+      "offset": 59,
+      "length": 81,
+      "code": {
+        "startLine": 168,
+        "length": 81,
+        "offset": 152,
+        "surroundingCode": "        cartItem.setAlignment(Pos.CENTER_LEFT); // Align the cart item content to the left\r\n\r\n        ImageView bookImageView = new ImageView(new Image(getClass().getResourceAsStream(\"/com/example/javafxtutorial/\" + b.getImagePath())));\r\n        bookImageView.setFitWidth(80);\r\n        bookImageView.setFitHeight(120);\r"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Bookstore_Unejsi_Isufaj",
+    "inspectionName": "DataFlowIssue"
+  },
+  "hash": "b07ca4a78af28bce4d6bc4913836bbdc1145fb92ad31b49ed191718b669aaf78"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Nullability and data flow problems",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Method invocation `toExternalForm` may produce `NullPointerException`",
+  "detailsInfo": "Reports code constructs that always violate nullability contracts, may throw exceptions, or are just redundant, based on data flow analysis.\n\nExamples:\n\n    if (array.length < index) {\n      System.out.println(array[index]);\n    } // Array index is always out of bounds\n\n    if (str == null) System.out.println(\"str is null\");\n    System.out.println(str.trim());\n    // the last statement may throw an NPE\n\n    @NotNull\n    Integer square(@Nullable Integer input) {\n        // the method contract is violated\n        return input == null ? null : input * input;\n    }\n\n\nThe inspection behavior may be controlled by a number of annotations, such as\n[nullability](https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html) annotations,\n[@Contract](https://www.jetbrains.com/help/idea/contract-annotations.html) annotation,\n`@Range` annotation and so on.\n\nConfigure the inspection:\n\n* Use the **Suggest @Nullable annotation for methods/fields/parameters where nullable values are used** option to warn when a nullable value is passed as an argument to a method with a non-annotated parameter, stored into non-annotated field, or returned from a non-annotated method. In this case, the inspection will suggest propagating the `@Nullable` annotation. You can also configure nullability annotations using the **Configure Annotations** button.\n* Use the **Treat non-annotated members and parameters as @Nullable** option to assume that non-annotated members can be null, so they must not be used in non-null context.\n* Use the **Report not-null required parameter with null-literal argument usages** option to report method parameters that cannot be null (e.g. immediately dereferenced in the method body), but there are call sites where a `null` literal is passed.\n* Use the **Report nullable methods that always return a non-null value** option to report methods that are annotated as `@Nullable`, but always return non-null value. In this case, it's suggested that you change the annotation to `@NotNull`.\n* Use the **Ignore assert statements** option to control how the inspection treats `assert` statements. By default, the option is disabled, which means that the assertions are assumed to be executed (-ea mode). If the option is enabled, the assertions will be completely ignored (-da mode).\n* Use the **Report problems that happen only on some code paths** option to control whether to report problems that may happen only on some code path. If this option is disabled, warnings like *exception is possible* will not be reported. The inspection will report only warnings like *exception will definitely occur*. This mode may greatly reduce the number of false-positives, especially if the code is not consistently annotated with nullability and contract annotations. That is why it can be useful for finding the most important problems in legacy code bases.\n\n\nBefore IntelliJ IDEA 2022.3, this inspection was part of the \"Constant Conditions \\& Exceptions\" inspection.\nNow, it is split into two inspections:\n\"Constant Values\" and \"Nullability and data flow problems\".",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/com/example/javafxtutorial/BookStoreApp.java",
+      "language": "JAVA",
+      "line": 110,
+      "offset": 156,
+      "length": 14,
+      "code": {
+        "startLine": 108,
+        "length": 14,
+        "offset": 193,
+        "surroundingCode": "        rightNavbar.setSpacing(8);\r\n\r\n        ImageView roleImageView = new ImageView(new Image(getClass().getResource(currentLoggedEmployee.getRole().getRoleName().toLowerCase() + \"Prfp.png\").toExternalForm()));\r\n        roleImageView.setOpacity(0.75);\r\n        roleImageView.setOnMouseClicked(new EventHandler<MouseEvent>() {\r"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Bookstore_Unejsi_Isufaj",
+    "inspectionName": "DataFlowIssue"
+  },
+  "hash": "b58e3ae28a9c3e555623e1320ead813d19b9fbcd942bcdc727cfc515bb7d82b9"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Nullability and data flow problems",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Argument `getClass().getResourceAsStream(\"/com/example/javafxtutorial/book_placeholder.png\")` might be null",
+  "detailsInfo": "Reports code constructs that always violate nullability contracts, may throw exceptions, or are just redundant, based on data flow analysis.\n\nExamples:\n\n    if (array.length < index) {\n      System.out.println(array[index]);\n    } // Array index is always out of bounds\n\n    if (str == null) System.out.println(\"str is null\");\n    System.out.println(str.trim());\n    // the last statement may throw an NPE\n\n    @NotNull\n    Integer square(@Nullable Integer input) {\n        // the method contract is violated\n        return input == null ? null : input * input;\n    }\n\n\nThe inspection behavior may be controlled by a number of annotations, such as\n[nullability](https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html) annotations,\n[@Contract](https://www.jetbrains.com/help/idea/contract-annotations.html) annotation,\n`@Range` annotation and so on.\n\nConfigure the inspection:\n\n* Use the **Suggest @Nullable annotation for methods/fields/parameters where nullable values are used** option to warn when a nullable value is passed as an argument to a method with a non-annotated parameter, stored into non-annotated field, or returned from a non-annotated method. In this case, the inspection will suggest propagating the `@Nullable` annotation. You can also configure nullability annotations using the **Configure Annotations** button.\n* Use the **Treat non-annotated members and parameters as @Nullable** option to assume that non-annotated members can be null, so they must not be used in non-null context.\n* Use the **Report not-null required parameter with null-literal argument usages** option to report method parameters that cannot be null (e.g. immediately dereferenced in the method body), but there are call sites where a `null` literal is passed.\n* Use the **Report nullable methods that always return a non-null value** option to report methods that are annotated as `@Nullable`, but always return non-null value. In this case, it's suggested that you change the annotation to `@NotNull`.\n* Use the **Ignore assert statements** option to control how the inspection treats `assert` statements. By default, the option is disabled, which means that the assertions are assumed to be executed (-ea mode). If the option is enabled, the assertions will be completely ignored (-da mode).\n* Use the **Report problems that happen only on some code paths** option to control whether to report problems that may happen only on some code path. If this option is disabled, warnings like *exception is possible* will not be reported. The inspection will report only warnings like *exception will definitely occur*. This mode may greatly reduce the number of false-positives, especially if the code is not consistently annotated with nullability and contract annotations. That is why it can be useful for finding the most important problems in legacy code bases.\n\n\nBefore IntelliJ IDEA 2022.3, this inspection was part of the \"Constant Conditions \\& Exceptions\" inspection.\nNow, it is split into two inspections:\n\"Constant Values\" and \"Nullability and data flow problems\".",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/com/example/javafxtutorial/view/AddBookPageView.java",
+      "language": "JAVA",
+      "line": 38,
+      "offset": 42,
+      "length": 82,
+      "code": {
+        "startLine": 36,
+        "length": 82,
+        "offset": 119,
+        "surroundingCode": "        // Image section\r\n        ImageView bookImageView = new ImageView();\r\n        bookImageView.setImage(new Image(getClass().getResourceAsStream(\"/com/example/javafxtutorial/book_placeholder.png\")));\r\n        bookImageView.setFitWidth(200);\r\n        bookImageView.setFitHeight(300);\r"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Bookstore_Unejsi_Isufaj",
+    "inspectionName": "DataFlowIssue"
+  },
+  "hash": "bcb1c7e1308a82a2bde3d4d3e07d6064102ba525a8350f587eb50753c045d250"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Nullability and data flow problems",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Argument `getClass().getResourceAsStream(\"/com/example/javafxtutorial/\" + roleNameForImage)` might be null",
+  "detailsInfo": "Reports code constructs that always violate nullability contracts, may throw exceptions, or are just redundant, based on data flow analysis.\n\nExamples:\n\n    if (array.length < index) {\n      System.out.println(array[index]);\n    } // Array index is always out of bounds\n\n    if (str == null) System.out.println(\"str is null\");\n    System.out.println(str.trim());\n    // the last statement may throw an NPE\n\n    @NotNull\n    Integer square(@Nullable Integer input) {\n        // the method contract is violated\n        return input == null ? null : input * input;\n    }\n\n\nThe inspection behavior may be controlled by a number of annotations, such as\n[nullability](https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html) annotations,\n[@Contract](https://www.jetbrains.com/help/idea/contract-annotations.html) annotation,\n`@Range` annotation and so on.\n\nConfigure the inspection:\n\n* Use the **Suggest @Nullable annotation for methods/fields/parameters where nullable values are used** option to warn when a nullable value is passed as an argument to a method with a non-annotated parameter, stored into non-annotated field, or returned from a non-annotated method. In this case, the inspection will suggest propagating the `@Nullable` annotation. You can also configure nullability annotations using the **Configure Annotations** button.\n* Use the **Treat non-annotated members and parameters as @Nullable** option to assume that non-annotated members can be null, so they must not be used in non-null context.\n* Use the **Report not-null required parameter with null-literal argument usages** option to report method parameters that cannot be null (e.g. immediately dereferenced in the method body), but there are call sites where a `null` literal is passed.\n* Use the **Report nullable methods that always return a non-null value** option to report methods that are annotated as `@Nullable`, but always return non-null value. In this case, it's suggested that you change the annotation to `@NotNull`.\n* Use the **Ignore assert statements** option to control how the inspection treats `assert` statements. By default, the option is disabled, which means that the assertions are assumed to be executed (-ea mode). If the option is enabled, the assertions will be completely ignored (-da mode).\n* Use the **Report problems that happen only on some code paths** option to control whether to report problems that may happen only on some code path. If this option is disabled, warnings like *exception is possible* will not be reported. The inspection will report only warnings like *exception will definitely occur*. This mode may greatly reduce the number of false-positives, especially if the code is not consistently annotated with nullability and contract annotations. That is why it can be useful for finding the most important problems in legacy code bases.\n\n\nBefore IntelliJ IDEA 2022.3, this inspection was part of the \"Constant Conditions \\& Exceptions\" inspection.\nNow, it is split into two inspections:\n\"Constant Values\" and \"Nullability and data flow problems\".",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/com/example/javafxtutorial/view/CheckPerformancePageView.java",
+      "language": "JAVA",
+      "line": 305,
+      "offset": 59,
+      "length": 81,
+      "code": {
+        "startLine": 303,
+        "length": 81,
+        "offset": 71,
+        "surroundingCode": "        }\r\n\r\n        ImageView roleImageView = new ImageView(new Image(getClass().getResourceAsStream(\"/com/example/javafxtutorial/\" + roleNameForImage)));\r\n        roleImageView.setOpacity(0.8);\r\n\r"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Bookstore_Unejsi_Isufaj",
+    "inspectionName": "DataFlowIssue"
+  },
+  "hash": "cc8a6e675ae3f7a9ee2a84f594baeaeb2be2a0b3484abc68da4bf7930bf45fbc"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Nullability and data flow problems",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Method invocation `toExternalForm` may produce `NullPointerException`",
+  "detailsInfo": "Reports code constructs that always violate nullability contracts, may throw exceptions, or are just redundant, based on data flow analysis.\n\nExamples:\n\n    if (array.length < index) {\n      System.out.println(array[index]);\n    } // Array index is always out of bounds\n\n    if (str == null) System.out.println(\"str is null\");\n    System.out.println(str.trim());\n    // the last statement may throw an NPE\n\n    @NotNull\n    Integer square(@Nullable Integer input) {\n        // the method contract is violated\n        return input == null ? null : input * input;\n    }\n\n\nThe inspection behavior may be controlled by a number of annotations, such as\n[nullability](https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html) annotations,\n[@Contract](https://www.jetbrains.com/help/idea/contract-annotations.html) annotation,\n`@Range` annotation and so on.\n\nConfigure the inspection:\n\n* Use the **Suggest @Nullable annotation for methods/fields/parameters where nullable values are used** option to warn when a nullable value is passed as an argument to a method with a non-annotated parameter, stored into non-annotated field, or returned from a non-annotated method. In this case, the inspection will suggest propagating the `@Nullable` annotation. You can also configure nullability annotations using the **Configure Annotations** button.\n* Use the **Treat non-annotated members and parameters as @Nullable** option to assume that non-annotated members can be null, so they must not be used in non-null context.\n* Use the **Report not-null required parameter with null-literal argument usages** option to report method parameters that cannot be null (e.g. immediately dereferenced in the method body), but there are call sites where a `null` literal is passed.\n* Use the **Report nullable methods that always return a non-null value** option to report methods that are annotated as `@Nullable`, but always return non-null value. In this case, it's suggested that you change the annotation to `@NotNull`.\n* Use the **Ignore assert statements** option to control how the inspection treats `assert` statements. By default, the option is disabled, which means that the assertions are assumed to be executed (-ea mode). If the option is enabled, the assertions will be completely ignored (-da mode).\n* Use the **Report problems that happen only on some code paths** option to control whether to report problems that may happen only on some code path. If this option is disabled, warnings like *exception is possible* will not be reported. The inspection will report only warnings like *exception will definitely occur*. This mode may greatly reduce the number of false-positives, especially if the code is not consistently annotated with nullability and contract annotations. That is why it can be useful for finding the most important problems in legacy code bases.\n\n\nBefore IntelliJ IDEA 2022.3, this inspection was part of the \"Constant Conditions \\& Exceptions\" inspection.\nNow, it is split into two inspections:\n\"Constant Values\" and \"Nullability and data flow problems\".",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/com/example/javafxtutorial/BookStoreApp.java",
+      "language": "JAVA",
+      "line": 64,
+      "offset": 102,
+      "length": 14,
+      "code": {
+        "startLine": 62,
+        "length": 14,
+        "offset": 130,
+        "surroundingCode": "\r\n        // Bookstore logo\r\n        ImageView logoImageView = new ImageView(new Image(getClass().getResource(\"booklandhome.png\").toExternalForm()));\r\n//        logoImageView.setFitWidth(100);\r\n//        logoImageView.setFitHeight(50);\r"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Bookstore_Unejsi_Isufaj",
+    "inspectionName": "DataFlowIssue"
+  },
+  "hash": "ce2f90eda54a8b4522736f5eadcbfc548af5572a7eea4fbf376035eb1d1940ec"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Nullability and data flow problems",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Method invocation `toExternalForm` may produce `NullPointerException`",
+  "detailsInfo": "Reports code constructs that always violate nullability contracts, may throw exceptions, or are just redundant, based on data flow analysis.\n\nExamples:\n\n    if (array.length < index) {\n      System.out.println(array[index]);\n    } // Array index is always out of bounds\n\n    if (str == null) System.out.println(\"str is null\");\n    System.out.println(str.trim());\n    // the last statement may throw an NPE\n\n    @NotNull\n    Integer square(@Nullable Integer input) {\n        // the method contract is violated\n        return input == null ? null : input * input;\n    }\n\n\nThe inspection behavior may be controlled by a number of annotations, such as\n[nullability](https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html) annotations,\n[@Contract](https://www.jetbrains.com/help/idea/contract-annotations.html) annotation,\n`@Range` annotation and so on.\n\nConfigure the inspection:\n\n* Use the **Suggest @Nullable annotation for methods/fields/parameters where nullable values are used** option to warn when a nullable value is passed as an argument to a method with a non-annotated parameter, stored into non-annotated field, or returned from a non-annotated method. In this case, the inspection will suggest propagating the `@Nullable` annotation. You can also configure nullability annotations using the **Configure Annotations** button.\n* Use the **Treat non-annotated members and parameters as @Nullable** option to assume that non-annotated members can be null, so they must not be used in non-null context.\n* Use the **Report not-null required parameter with null-literal argument usages** option to report method parameters that cannot be null (e.g. immediately dereferenced in the method body), but there are call sites where a `null` literal is passed.\n* Use the **Report nullable methods that always return a non-null value** option to report methods that are annotated as `@Nullable`, but always return non-null value. In this case, it's suggested that you change the annotation to `@NotNull`.\n* Use the **Ignore assert statements** option to control how the inspection treats `assert` statements. By default, the option is disabled, which means that the assertions are assumed to be executed (-ea mode). If the option is enabled, the assertions will be completely ignored (-da mode).\n* Use the **Report problems that happen only on some code paths** option to control whether to report problems that may happen only on some code path. If this option is disabled, warnings like *exception is possible* will not be reported. The inspection will report only warnings like *exception will definitely occur*. This mode may greatly reduce the number of false-positives, especially if the code is not consistently annotated with nullability and contract annotations. That is why it can be useful for finding the most important problems in legacy code bases.\n\n\nBefore IntelliJ IDEA 2022.3, this inspection was part of the \"Constant Conditions \\& Exceptions\" inspection.\nNow, it is split into two inspections:\n\"Constant Values\" and \"Nullability and data flow problems\".",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/com/example/javafxtutorial/BookStoreApp.java",
+      "language": "JAVA",
+      "line": 199,
+      "offset": 89,
+      "length": 14,
+      "code": {
+        "startLine": 197,
+        "length": 14,
+        "offset": 158,
+        "surroundingCode": "        statisticsButton.setFont(Font.font(\"Berlin Sans FB\", 18));\r\n\r\n        Image addEmployeeIcon = new Image(getClass().getResource(\"addEmployeeIcon.png\").toExternalForm());\r\n        ImageView addEmployeeEmployeeImageView = new ImageView(addEmployeeIcon);\r\n        Label addEmployeeButton = new Label(\"Add Employee\", addEmployeeEmployeeImageView);\r"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Bookstore_Unejsi_Isufaj",
+    "inspectionName": "DataFlowIssue"
+  },
+  "hash": "d37d5c274bb27a803f91bd7beebe1e80802908bbc51506e0fa1520cd662fbc64"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Nullability and data flow problems",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Method invocation `toExternalForm` may produce `NullPointerException`",
+  "detailsInfo": "Reports code constructs that always violate nullability contracts, may throw exceptions, or are just redundant, based on data flow analysis.\n\nExamples:\n\n    if (array.length < index) {\n      System.out.println(array[index]);\n    } // Array index is always out of bounds\n\n    if (str == null) System.out.println(\"str is null\");\n    System.out.println(str.trim());\n    // the last statement may throw an NPE\n\n    @NotNull\n    Integer square(@Nullable Integer input) {\n        // the method contract is violated\n        return input == null ? null : input * input;\n    }\n\n\nThe inspection behavior may be controlled by a number of annotations, such as\n[nullability](https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html) annotations,\n[@Contract](https://www.jetbrains.com/help/idea/contract-annotations.html) annotation,\n`@Range` annotation and so on.\n\nConfigure the inspection:\n\n* Use the **Suggest @Nullable annotation for methods/fields/parameters where nullable values are used** option to warn when a nullable value is passed as an argument to a method with a non-annotated parameter, stored into non-annotated field, or returned from a non-annotated method. In this case, the inspection will suggest propagating the `@Nullable` annotation. You can also configure nullability annotations using the **Configure Annotations** button.\n* Use the **Treat non-annotated members and parameters as @Nullable** option to assume that non-annotated members can be null, so they must not be used in non-null context.\n* Use the **Report not-null required parameter with null-literal argument usages** option to report method parameters that cannot be null (e.g. immediately dereferenced in the method body), but there are call sites where a `null` literal is passed.\n* Use the **Report nullable methods that always return a non-null value** option to report methods that are annotated as `@Nullable`, but always return non-null value. In this case, it's suggested that you change the annotation to `@NotNull`.\n* Use the **Ignore assert statements** option to control how the inspection treats `assert` statements. By default, the option is disabled, which means that the assertions are assumed to be executed (-ea mode). If the option is enabled, the assertions will be completely ignored (-da mode).\n* Use the **Report problems that happen only on some code paths** option to control whether to report problems that may happen only on some code path. If this option is disabled, warnings like *exception is possible* will not be reported. The inspection will report only warnings like *exception will definitely occur*. This mode may greatly reduce the number of false-positives, especially if the code is not consistently annotated with nullability and contract annotations. That is why it can be useful for finding the most important problems in legacy code bases.\n\n\nBefore IntelliJ IDEA 2022.3, this inspection was part of the \"Constant Conditions \\& Exceptions\" inspection.\nNow, it is split into two inspections:\n\"Constant Values\" and \"Nullability and data flow problems\".",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/com/example/javafxtutorial/BookStoreApp.java",
+      "language": "JAVA",
+      "line": 204,
+      "offset": 95,
+      "length": 14,
+      "code": {
+        "startLine": 202,
+        "length": 14,
+        "offset": 165,
+        "surroundingCode": "        addEmployeeButton.setFont(Font.font(\"Berlin Sans FB\", 18));\r\n\r\n        Image manageEmployeeIcon = new Image(getClass().getResource(\"manageEmployeeIcon.png\").toExternalForm());\r\n        ImageView manageEmployeeImageView = new ImageView(manageEmployeeIcon);\r\n        Label manageEmployeeButton = new Label(\"Manage Employees\", manageEmployeeImageView);\r"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Bookstore_Unejsi_Isufaj",
+    "inspectionName": "DataFlowIssue"
+  },
+  "hash": "e066e0d965c17b76e56041b2c0d7cbb699fe5c9ec9ff3b90ed9ff367827470fd"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Nullability and data flow problems",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Argument `getClass().getResourceAsStream(\"/com/example/javafxtutorial/\" + imageName)` might be null",
+  "detailsInfo": "Reports code constructs that always violate nullability contracts, may throw exceptions, or are just redundant, based on data flow analysis.\n\nExamples:\n\n    if (array.length < index) {\n      System.out.println(array[index]);\n    } // Array index is always out of bounds\n\n    if (str == null) System.out.println(\"str is null\");\n    System.out.println(str.trim());\n    // the last statement may throw an NPE\n\n    @NotNull\n    Integer square(@Nullable Integer input) {\n        // the method contract is violated\n        return input == null ? null : input * input;\n    }\n\n\nThe inspection behavior may be controlled by a number of annotations, such as\n[nullability](https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html) annotations,\n[@Contract](https://www.jetbrains.com/help/idea/contract-annotations.html) annotation,\n`@Range` annotation and so on.\n\nConfigure the inspection:\n\n* Use the **Suggest @Nullable annotation for methods/fields/parameters where nullable values are used** option to warn when a nullable value is passed as an argument to a method with a non-annotated parameter, stored into non-annotated field, or returned from a non-annotated method. In this case, the inspection will suggest propagating the `@Nullable` annotation. You can also configure nullability annotations using the **Configure Annotations** button.\n* Use the **Treat non-annotated members and parameters as @Nullable** option to assume that non-annotated members can be null, so they must not be used in non-null context.\n* Use the **Report not-null required parameter with null-literal argument usages** option to report method parameters that cannot be null (e.g. immediately dereferenced in the method body), but there are call sites where a `null` literal is passed.\n* Use the **Report nullable methods that always return a non-null value** option to report methods that are annotated as `@Nullable`, but always return non-null value. In this case, it's suggested that you change the annotation to `@NotNull`.\n* Use the **Ignore assert statements** option to control how the inspection treats `assert` statements. By default, the option is disabled, which means that the assertions are assumed to be executed (-ea mode). If the option is enabled, the assertions will be completely ignored (-da mode).\n* Use the **Report problems that happen only on some code paths** option to control whether to report problems that may happen only on some code path. If this option is disabled, warnings like *exception is possible* will not be reported. The inspection will report only warnings like *exception will definitely occur*. This mode may greatly reduce the number of false-positives, especially if the code is not consistently annotated with nullability and contract annotations. That is why it can be useful for finding the most important problems in legacy code bases.\n\n\nBefore IntelliJ IDEA 2022.3, this inspection was part of the \"Constant Conditions \\& Exceptions\" inspection.\nNow, it is split into two inspections:\n\"Constant Values\" and \"Nullability and data flow problems\".",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/com/example/javafxtutorial/view/ManagePermissionsPageView.java",
+      "language": "JAVA",
+      "line": 47,
+      "offset": 33,
+      "length": 74,
+      "code": {
+        "startLine": 45,
+        "length": 74,
+        "offset": 149,
+        "surroundingCode": "    private VBox createSection(String role, String imageName) {\r\n        // Create Image and ImageView for the user\r\n        Image image = new Image(getClass().getResourceAsStream(\"/com/example/javafxtutorial/\" + imageName));\r\n        ImageView imageView = new ImageView(image);\r\n        imageView.setFitWidth(130);\r"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Bookstore_Unejsi_Isufaj",
+    "inspectionName": "DataFlowIssue"
+  },
+  "hash": "f0f51dfe08a6f998a85fb97a7f7909284045c388beea7500daa56a8e84394f50"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Nullability and data flow problems",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Method invocation `toExternalForm` may produce `NullPointerException`",
+  "detailsInfo": "Reports code constructs that always violate nullability contracts, may throw exceptions, or are just redundant, based on data flow analysis.\n\nExamples:\n\n    if (array.length < index) {\n      System.out.println(array[index]);\n    } // Array index is always out of bounds\n\n    if (str == null) System.out.println(\"str is null\");\n    System.out.println(str.trim());\n    // the last statement may throw an NPE\n\n    @NotNull\n    Integer square(@Nullable Integer input) {\n        // the method contract is violated\n        return input == null ? null : input * input;\n    }\n\n\nThe inspection behavior may be controlled by a number of annotations, such as\n[nullability](https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html) annotations,\n[@Contract](https://www.jetbrains.com/help/idea/contract-annotations.html) annotation,\n`@Range` annotation and so on.\n\nConfigure the inspection:\n\n* Use the **Suggest @Nullable annotation for methods/fields/parameters where nullable values are used** option to warn when a nullable value is passed as an argument to a method with a non-annotated parameter, stored into non-annotated field, or returned from a non-annotated method. In this case, the inspection will suggest propagating the `@Nullable` annotation. You can also configure nullability annotations using the **Configure Annotations** button.\n* Use the **Treat non-annotated members and parameters as @Nullable** option to assume that non-annotated members can be null, so they must not be used in non-null context.\n* Use the **Report not-null required parameter with null-literal argument usages** option to report method parameters that cannot be null (e.g. immediately dereferenced in the method body), but there are call sites where a `null` literal is passed.\n* Use the **Report nullable methods that always return a non-null value** option to report methods that are annotated as `@Nullable`, but always return non-null value. In this case, it's suggested that you change the annotation to `@NotNull`.\n* Use the **Ignore assert statements** option to control how the inspection treats `assert` statements. By default, the option is disabled, which means that the assertions are assumed to be executed (-ea mode). If the option is enabled, the assertions will be completely ignored (-da mode).\n* Use the **Report problems that happen only on some code paths** option to control whether to report problems that may happen only on some code path. If this option is disabled, warnings like *exception is possible* will not be reported. The inspection will report only warnings like *exception will definitely occur*. This mode may greatly reduce the number of false-positives, especially if the code is not consistently annotated with nullability and contract annotations. That is why it can be useful for finding the most important problems in legacy code bases.\n\n\nBefore IntelliJ IDEA 2022.3, this inspection was part of the \"Constant Conditions \\& Exceptions\" inspection.\nNow, it is split into two inspections:\n\"Constant Values\" and \"Nullability and data flow problems\".",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/com/example/javafxtutorial/BookStoreApp.java",
+      "language": "JAVA",
+      "line": 171,
+      "offset": 75,
+      "length": 14,
+      "code": {
+        "startLine": 169,
+        "length": 14,
+        "offset": 138,
+        "surroundingCode": "        homeButton.setFont(Font.font(\"Berlin Sans FB\", 18));\r\n\r\n        Image cartIcon = new Image(getClass().getResource(\"cartIcon.png\").toExternalForm());\r\n        ImageView cartIconImageView = new ImageView(cartIcon);\r\n        Label cartButton = new Label(\"Cart\", cartIconImageView);\r"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Bookstore_Unejsi_Isufaj",
+    "inspectionName": "DataFlowIssue"
+  },
+  "hash": "f3ba49735898e085b2a7a6edcd22d18e606694d2ffbcde0902e556f47070ce1c"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Nullability and data flow problems",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Method invocation `toExternalForm` may produce `NullPointerException`",
+  "detailsInfo": "Reports code constructs that always violate nullability contracts, may throw exceptions, or are just redundant, based on data flow analysis.\n\nExamples:\n\n    if (array.length < index) {\n      System.out.println(array[index]);\n    } // Array index is always out of bounds\n\n    if (str == null) System.out.println(\"str is null\");\n    System.out.println(str.trim());\n    // the last statement may throw an NPE\n\n    @NotNull\n    Integer square(@Nullable Integer input) {\n        // the method contract is violated\n        return input == null ? null : input * input;\n    }\n\n\nThe inspection behavior may be controlled by a number of annotations, such as\n[nullability](https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html) annotations,\n[@Contract](https://www.jetbrains.com/help/idea/contract-annotations.html) annotation,\n`@Range` annotation and so on.\n\nConfigure the inspection:\n\n* Use the **Suggest @Nullable annotation for methods/fields/parameters where nullable values are used** option to warn when a nullable value is passed as an argument to a method with a non-annotated parameter, stored into non-annotated field, or returned from a non-annotated method. In this case, the inspection will suggest propagating the `@Nullable` annotation. You can also configure nullability annotations using the **Configure Annotations** button.\n* Use the **Treat non-annotated members and parameters as @Nullable** option to assume that non-annotated members can be null, so they must not be used in non-null context.\n* Use the **Report not-null required parameter with null-literal argument usages** option to report method parameters that cannot be null (e.g. immediately dereferenced in the method body), but there are call sites where a `null` literal is passed.\n* Use the **Report nullable methods that always return a non-null value** option to report methods that are annotated as `@Nullable`, but always return non-null value. In this case, it's suggested that you change the annotation to `@NotNull`.\n* Use the **Ignore assert statements** option to control how the inspection treats `assert` statements. By default, the option is disabled, which means that the assertions are assumed to be executed (-ea mode). If the option is enabled, the assertions will be completely ignored (-da mode).\n* Use the **Report problems that happen only on some code paths** option to control whether to report problems that may happen only on some code path. If this option is disabled, warnings like *exception is possible* will not be reported. The inspection will report only warnings like *exception will definitely occur*. This mode may greatly reduce the number of false-positives, especially if the code is not consistently annotated with nullability and contract annotations. That is why it can be useful for finding the most important problems in legacy code bases.\n\n\nBefore IntelliJ IDEA 2022.3, this inspection was part of the \"Constant Conditions \\& Exceptions\" inspection.\nNow, it is split into two inspections:\n\"Constant Values\" and \"Nullability and data flow problems\".",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/com/example/javafxtutorial/BookStoreApp.java",
+      "language": "JAVA",
+      "line": 77,
+      "offset": 97,
+      "length": 14,
+      "code": {
+        "startLine": 75,
+        "length": 14,
+        "offset": 170,
+        "surroundingCode": "        searchTypeOptions.setValue(\"Name\"); // Set default search type\r\n\r\n        ImageView searchIcon = new ImageView(new Image(getClass().getResource(\"searchIcon.png\").toExternalForm()));\r\n        searchIcon.setFitWidth(17);\r\n        searchIcon.setFitHeight(17);\r"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Bookstore_Unejsi_Isufaj",
+    "inspectionName": "DataFlowIssue"
+  },
+  "hash": "fa7a39c0e8987083fc91235271b3b3b5f9e3c776971fdc15a250b7ec0f996a37"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Statement with empty body",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "`else` statement has empty body",
+  "detailsInfo": "Reports `if`, `while`, `do`, `for`, and `switch` statements with empty bodies.\n\nWhile occasionally intended, such code is confusing and is often the result of a typo.\n\nThis inspection is disabled in JSP files.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/com/example/javafxtutorial/view/CheckPerformancePageView.java",
+      "language": "JAVA",
+      "line": 101,
+      "offset": 34,
+      "length": 4,
+      "code": {
+        "startLine": 99,
+        "length": 4,
+        "offset": 388,
+        "surroundingCode": "                                if(!(e.getAccessLevel() == 2 || e.getAccessLevel() == 3) || e.getUserId().equals(currentLoggedUser.getUserId())){\r\n                                    cartPage.getChildren().add(createEmpPerformanceItem(e, ((DatePicker)searchBar.getChildren().get(1)).getValue(), ((DatePicker)searchBar.getChildren().get(3)).getValue()));\r\n                                }else{\r\n                                    //it wont show employyes other than librarians\r\n                                }\r"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Bookstore_Unejsi_Isufaj",
+    "inspectionName": "EmptyStatementBody"
+  },
+  "hash": "35700aa41d110d637a1622482e2fa492deccdcab9b5ccf3baf8b680264220595"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Statement with empty body",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "`else` statement has empty body",
+  "detailsInfo": "Reports `if`, `while`, `do`, `for`, and `switch` statements with empty bodies.\n\nWhile occasionally intended, such code is confusing and is often the result of a typo.\n\nThis inspection is disabled in JSP files.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/com/example/javafxtutorial/view/CheckPerformancePageView.java",
+      "language": "JAVA",
+      "line": 66,
+      "offset": 18,
+      "length": 4,
+      "code": {
+        "startLine": 64,
+        "length": 4,
+        "offset": 226,
+        "surroundingCode": "                if(!(e.getAccessLevel() == 2 || e.getAccessLevel() == 3) || e.getUserId().equals(currentLoggedUser.getUserId())){\r\n                    cartPage.getChildren().add(createEmpPerformanceItem(e));\r\n                }else{\r\n                    //it wont show employyes other than librarians\r\n\r"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Bookstore_Unejsi_Isufaj",
+    "inspectionName": "EmptyStatementBody"
+  },
+  "hash": "4e964b483575f5608fb1ef4ea66049ba33b15976bfeaf18c5a9b77868120ae13"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Statement with empty body",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "`else` statement has empty body",
+  "detailsInfo": "Reports `if`, `while`, `do`, `for`, and `switch` statements with empty bodies.\n\nWhile occasionally intended, such code is confusing and is often the result of a typo.\n\nThis inspection is disabled in JSP files.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/com/example/javafxtutorial/view/ManageEmployeePageView.java",
+      "language": "JAVA",
+      "line": 39,
+      "offset": 18,
+      "length": 4,
+      "code": {
+        "startLine": 37,
+        "length": 4,
+        "offset": 176,
+        "surroundingCode": "                if (!(e.getAccessLevel() == 2 || e.getAccessLevel() == 3)){\r\n                    cartPage.getChildren().add(createEmployeeItem(e, cartPage));\r\n                }else{\r\n                    //it wont show employees other than librarians\r\n                }\r"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Bookstore_Unejsi_Isufaj",
+    "inspectionName": "EmptyStatementBody"
+  },
+  "hash": "e90f5003737522ecc75800bd7e51c28901b1ba9e6b9c727e85a72eadb831c2bf"
+},{
+  "tool": "Code Inspection",
+  "category": "Control flow issues",
+  "type": "'if' statement with identical branches or common parts",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "Moderate",
+  "comment": "Common part can be extracted from 'if'",
+  "detailsInfo": "Reports `if` statements in which common parts can be extracted from the branches.\n\nThese common parts are independent from the condition and make `if` statements harder to understand.\n\nExample:\n\n\n      if (x > 12) {\n        doSomethingBefore();\n        doSomethingDifferent1();\n        doSomethingAfter();\n      } else {\n        doSomethingBefore();\n        doSomethingDifferent2();\n        doSomethingAfter();\n      }\n\nAfter the quick-fix is applied:\n\n\n      doSomethingBefore();\n      if (x > 12) {\n        doSomethingDifferent1();\n      } else {\n        doSomethingDifferent2();\n      }\n      doSomethingAfter();\n\nUpdated in 2018.1",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/com/example/javafxtutorial/view/ManagePermissionsPageView.java",
+      "language": "JAVA",
+      "line": 172,
+      "offset": 9,
+      "length": 2,
+      "code": {
+        "startLine": 170,
+        "length": 2,
+        "offset": 96,
+        "surroundingCode": "\r\n    private boolean permissionExistsForRole(String roleName, String permissionName){\r\n        if(roleName.equals(\"Librarian\")){\r\n            for (String s: roleController.getRoles()[0].getPermissions()){\r\n                if (permissionName.equals(s)){\r"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Bookstore_Unejsi_Isufaj",
+    "inspectionName": "IfStatementWithIdenticalBranches"
+  },
+  "hash": "2790afb151ec1ae197aa38b01c3125f152a254aa4d9f3fc85b045c76a9af6395"
+},{
+  "tool": "Code Inspection",
+  "category": "Control flow issues",
+  "type": "'if' statement with identical branches or common parts",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "Moderate",
+  "comment": "Common part can be extracted from 'if'",
+  "detailsInfo": "Reports `if` statements in which common parts can be extracted from the branches.\n\nThese common parts are independent from the condition and make `if` statements harder to understand.\n\nExample:\n\n\n      if (x > 12) {\n        doSomethingBefore();\n        doSomethingDifferent1();\n        doSomethingAfter();\n      } else {\n        doSomethingBefore();\n        doSomethingDifferent2();\n        doSomethingAfter();\n      }\n\nAfter the quick-fix is applied:\n\n\n      doSomethingBefore();\n      if (x > 12) {\n        doSomethingDifferent1();\n      } else {\n        doSomethingDifferent2();\n      }\n      doSomethingAfter();\n\nUpdated in 2018.1",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/com/example/javafxtutorial/view/CartPageView.java",
+      "language": "JAVA",
+      "line": 152,
+      "offset": 13,
+      "length": 2,
+      "code": {
+        "startLine": 150,
+        "length": 2,
+        "offset": 68,
+        "surroundingCode": "\r\n        substractButton.setOnAction(actionEvent -> {\r\n            if(singleCartItem.getQuantity() == 1){\r\n                cartPage.getChildren().remove(cartItem);\r\n                cartController.removeCartItem(singleCartItem);\r"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Bookstore_Unejsi_Isufaj",
+    "inspectionName": "IfStatementWithIdenticalBranches"
+  },
+  "hash": "288816088927cd2e1029d4572588a8ce3d1ed29ee30597710e73f396feb57436"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Mismatched query and update of collection",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Contents of collection `cartItems` are updated, but never queried",
+  "detailsInfo": "Reports collections whose contents are either queried and not updated, or updated and not queried.\n\n\nSuch inconsistent queries and updates are pointless and may indicate\neither dead code or a typo.\n\n\nUse the inspection settings to specify name patterns that correspond to update/query methods.\nQuery methods that return an element are automatically detected, and only\nthose that write data to an output parameter (for example, an `OutputStream`) need to be specified.\n\n\n**Example:**\n\nSuppose you have your custom `FixedStack` class with method `store()`:\n\n\n      public class FixedStack<T> extends Collection<T> {\n        public T store(T t) {\n          // implementation\n        }\n      }\n\nYou can add `store` to the update methods table in order to report mismatched queries like:\n\n\n      void test(int i) {\n        FixedStack<Integer> stack = new FixedStack<>();\n        stack.store(i);\n      }\n",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/com/example/javafxtutorial/controller/OrderController.java",
+      "language": "JAVA",
+      "line": 81,
+      "offset": 29,
+      "length": 9,
+      "code": {
+        "startLine": 79,
+        "length": 9,
+        "offset": 32,
+        "surroundingCode": "\r\n\r\n        ArrayList<CartItem> cartItems = new ArrayList<>();\r\n\r\n        cartItems.add(new CartItem(new Book(\"book1.png\", \"Book1\", \"Adventure\", \"Botimet Pegi\",\"Author1\", 5, 20), 3, 60));\r"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "Bookstore_Unejsi_Isufaj",
+    "inspectionName": "MismatchedCollectionQueryUpdate"
+  },
+  "hash": "0e41b0ca0577479cd46da3c59707dc32e85a82680dcc4869959949ca20680375"
+}]}

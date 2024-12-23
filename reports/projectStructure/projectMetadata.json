@@ -1,0 +1,415 @@
+{
+  "version": "2.0.0",
+  "name": "project",
+  "path": "/data/project",
+  "projectLicenses": [
+    {
+      "key": "PROPRIETARY-LICENSE",
+      "rules": [],
+      "tags": []
+    }
+  ],
+  "modules": [
+    {
+      "name": "Bookstore_Unejsi_Isufaj",
+      "path": "/data/project",
+      "licenses": [
+        {
+          "key": "PROPRIETARY-LICENSE",
+          "rules": [],
+          "tags": []
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "org.openjfx:javafx-controls",
+          "name": "javafx-controls",
+          "version": "21-ea+24",
+          "module": "Bookstore_Unejsi_Isufaj",
+          "type": "Java",
+          "paths": [
+            "/data/cache/.m2/org/openjfx/javafx-controls/21-ea+24/javafx-controls-21-ea+24-linux.jar"
+          ],
+          "homepageUrl": "",
+          "licenses": [
+            {
+              "key": "NONE",
+              "rules": [],
+              "tags": [
+                {
+                  "type": "Unknown",
+                  "comment": ""
+                }
+              ]
+            }
+          ],
+          "dependencies": [
+            {
+              "id": "org.openjfx:javafx-controls",
+              "name": "javafx-controls",
+              "version": "21-ea+24",
+              "module": "Bookstore_Unejsi_Isufaj",
+              "type": "Java",
+              "paths": [
+                "/data/cache/.m2/org/openjfx/javafx-controls/21-ea+24/javafx-controls-21-ea+24-linux.jar"
+              ],
+              "homepageUrl": "",
+              "licenses": [
+                {
+                  "key": "NONE",
+                  "rules": [],
+                  "tags": [
+                    {
+                      "type": "Unknown",
+                      "comment": ""
+                    }
+                  ]
+                }
+              ],
+              "dependencies": []
+            },
+            {
+              "id": "org.openjfx:javafx-graphics",
+              "name": "javafx-graphics",
+              "version": "21-ea+24",
+              "module": "Bookstore_Unejsi_Isufaj",
+              "type": "Java",
+              "paths": [
+                "/data/cache/.m2/org/openjfx/javafx-graphics/21-ea+24/javafx-graphics-21-ea+24-linux.jar"
+              ],
+              "homepageUrl": "",
+              "licenses": [
+                {
+                  "key": "NONE",
+                  "rules": [],
+                  "tags": [
+                    {
+                      "type": "Unknown",
+                      "comment": ""
+                    }
+                  ]
+                }
+              ],
+              "dependencies": [
+                {
+                  "id": "org.openjfx:javafx-graphics",
+                  "name": "javafx-graphics",
+                  "version": "21-ea+24",
+                  "module": "Bookstore_Unejsi_Isufaj",
+                  "type": "Java",
+                  "paths": [
+                    "/data/cache/.m2/org/openjfx/javafx-graphics/21-ea+24/javafx-graphics-21-ea+24-linux.jar"
+                  ],
+                  "homepageUrl": "",
+                  "licenses": [
+                    {
+                      "key": "NONE",
+                      "rules": [],
+                      "tags": [
+                        {
+                          "type": "Unknown",
+                          "comment": ""
+                        }
+                      ]
+                    }
+                  ],
+                  "dependencies": []
+                },
+                {
+                  "id": "org.openjfx:javafx-base",
+                  "name": "javafx-base",
+                  "version": "21-ea+24",
+                  "module": "Bookstore_Unejsi_Isufaj",
+                  "type": "Java",
+                  "paths": [
+                    "/data/cache/.m2/org/openjfx/javafx-base/21-ea+24/javafx-base-21-ea+24-linux.jar"
+                  ],
+                  "homepageUrl": "",
+                  "licenses": [
+                    {
+                      "key": "NONE",
+                      "rules": [],
+                      "tags": [
+                        {
+                          "type": "Unknown",
+                          "comment": ""
+                        }
+                      ]
+                    }
+                  ],
+                  "dependencies": [
+                    {
+                      "id": "org.openjfx:javafx-base",
+                      "name": "javafx-base",
+                      "version": "21-ea+24",
+                      "module": "Bookstore_Unejsi_Isufaj",
+                      "type": "Java",
+                      "paths": [
+                        "/data/cache/.m2/org/openjfx/javafx-base/21-ea+24/javafx-base-21-ea+24-linux.jar"
+                      ],
+                      "homepageUrl": "",
+                      "licenses": [
+                        {
+                          "key": "NONE",
+                          "rules": [],
+                          "tags": [
+                            {
+                              "type": "Unknown",
+                              "comment": ""
+                            }
+                          ]
+                        }
+                      ],
+                      "dependencies": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "org.openjfx:javafx-fxml",
+          "name": "javafx-fxml",
+          "version": "21-ea+24",
+          "module": "Bookstore_Unejsi_Isufaj",
+          "type": "Java",
+          "paths": [
+            "/data/cache/.m2/org/openjfx/javafx-fxml/21-ea+24/javafx-fxml-21-ea+24.jar"
+          ],
+          "homepageUrl": "",
+          "licenses": [
+            {
+              "key": "NONE",
+              "rules": [],
+              "tags": [
+                {
+                  "type": "Unknown",
+                  "comment": ""
+                }
+              ]
+            }
+          ],
+          "dependencies": [
+            {
+              "id": "org.openjfx:javafx-fxml",
+              "name": "javafx-fxml",
+              "version": "21-ea+24",
+              "module": "Bookstore_Unejsi_Isufaj",
+              "type": "Java",
+              "paths": [
+                "/data/cache/.m2/org/openjfx/javafx-fxml/21-ea+24/javafx-fxml-21-ea+24.jar"
+              ],
+              "homepageUrl": "",
+              "licenses": [
+                {
+                  "key": "NONE",
+                  "rules": [],
+                  "tags": [
+                    {
+                      "type": "Unknown",
+                      "comment": ""
+                    }
+                  ]
+                }
+              ],
+              "dependencies": []
+            },
+            {
+              "id": "org.openjfx:javafx-controls",
+              "name": "javafx-controls",
+              "version": "21-ea+24",
+              "module": "Bookstore_Unejsi_Isufaj",
+              "type": "Java",
+              "paths": [
+                "/data/cache/.m2/org/openjfx/javafx-controls/21-ea+24/javafx-controls-21-ea+24-linux.jar"
+              ],
+              "homepageUrl": "",
+              "licenses": [
+                {
+                  "key": "NONE",
+                  "rules": [],
+                  "tags": [
+                    {
+                      "type": "Unknown",
+                      "comment": ""
+                    }
+                  ]
+                }
+              ],
+              "dependencies": [
+                {
+                  "id": "org.openjfx:javafx-controls",
+                  "name": "javafx-controls",
+                  "version": "21-ea+24",
+                  "module": "Bookstore_Unejsi_Isufaj",
+                  "type": "Java",
+                  "paths": [
+                    "/data/cache/.m2/org/openjfx/javafx-controls/21-ea+24/javafx-controls-21-ea+24-linux.jar"
+                  ],
+                  "homepageUrl": "",
+                  "licenses": [
+                    {
+                      "key": "NONE",
+                      "rules": [],
+                      "tags": [
+                        {
+                          "type": "Unknown",
+                          "comment": ""
+                        }
+                      ]
+                    }
+                  ],
+                  "dependencies": []
+                },
+                {
+                  "id": "org.openjfx:javafx-graphics",
+                  "name": "javafx-graphics",
+                  "version": "21-ea+24",
+                  "module": "Bookstore_Unejsi_Isufaj",
+                  "type": "Java",
+                  "paths": [
+                    "/data/cache/.m2/org/openjfx/javafx-graphics/21-ea+24/javafx-graphics-21-ea+24-linux.jar"
+                  ],
+                  "homepageUrl": "",
+                  "licenses": [
+                    {
+                      "key": "NONE",
+                      "rules": [],
+                      "tags": [
+                        {
+                          "type": "Unknown",
+                          "comment": ""
+                        }
+                      ]
+                    }
+                  ],
+                  "dependencies": [
+                    {
+                      "id": "org.openjfx:javafx-graphics",
+                      "name": "javafx-graphics",
+                      "version": "21-ea+24",
+                      "module": "Bookstore_Unejsi_Isufaj",
+                      "type": "Java",
+                      "paths": [
+                        "/data/cache/.m2/org/openjfx/javafx-graphics/21-ea+24/javafx-graphics-21-ea+24-linux.jar"
+                      ],
+                      "homepageUrl": "",
+                      "licenses": [
+                        {
+                          "key": "NONE",
+                          "rules": [],
+                          "tags": [
+                            {
+                              "type": "Unknown",
+                              "comment": ""
+                            }
+                          ]
+                        }
+                      ],
+                      "dependencies": []
+                    },
+                    {
+                      "id": "org.openjfx:javafx-base",
+                      "name": "javafx-base",
+                      "version": "21-ea+24",
+                      "module": "Bookstore_Unejsi_Isufaj",
+                      "type": "Java",
+                      "paths": [
+                        "/data/cache/.m2/org/openjfx/javafx-base/21-ea+24/javafx-base-21-ea+24-linux.jar"
+                      ],
+                      "homepageUrl": "",
+                      "licenses": [
+                        {
+                          "key": "NONE",
+                          "rules": [],
+                          "tags": [
+                            {
+                              "type": "Unknown",
+                              "comment": ""
+                            }
+                          ]
+                        }
+                      ],
+                      "dependencies": [
+                        {
+                          "id": "org.openjfx:javafx-base",
+                          "name": "javafx-base",
+                          "version": "21-ea+24",
+                          "module": "Bookstore_Unejsi_Isufaj",
+                          "type": "Java",
+                          "paths": [
+                            "/data/cache/.m2/org/openjfx/javafx-base/21-ea+24/javafx-base-21-ea+24-linux.jar"
+                          ],
+                          "homepageUrl": "",
+                          "licenses": [
+                            {
+                              "key": "NONE",
+                              "rules": [],
+                              "tags": [
+                                {
+                                  "type": "Unknown",
+                                  "comment": ""
+                                }
+                              ]
+                            }
+                          ],
+                          "dependencies": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "org.kordamp.ikonli:ikonli-javafx",
+          "name": "ikonli-javafx",
+          "version": "12.3.1",
+          "module": "Bookstore_Unejsi_Isufaj",
+          "type": "Java",
+          "paths": [
+            "/data/cache/.m2/org/kordamp/ikonli/ikonli-javafx/12.3.1/ikonli-javafx-12.3.1.jar"
+          ],
+          "homepageUrl": "",
+          "licenses": [
+            {
+              "key": "Apache-2.0",
+              "confidence": 0.9546314,
+              "path": "/data/cache/.m2/org/kordamp/ikonli/ikonli-javafx/12.3.1/ikonli-javafx-12.3.1.jar!/META-INF/LICENSE",
+              "rules": [],
+              "tags": []
+            }
+          ],
+          "dependencies": [
+            {
+              "id": "org.kordamp.ikonli:ikonli-core",
+              "name": "ikonli-core",
+              "version": "12.3.1",
+              "module": "Bookstore_Unejsi_Isufaj",
+              "type": "Java",
+              "paths": [
+                "/data/cache/.m2/org/kordamp/ikonli/ikonli-core/12.3.1/ikonli-core-12.3.1.jar"
+              ],
+              "homepageUrl": "",
+              "licenses": [
+                {
+                  "key": "Apache-2.0",
+                  "confidence": 0.9546314,
+                  "path": "/data/cache/.m2/org/kordamp/ikonli/ikonli-core/12.3.1/ikonli-core-12.3.1.jar!/META-INF/LICENSE",
+                  "rules": [],
+                  "tags": []
+                }
+              ],
+              "dependencies": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "licenses": [],
+  "dependencies": []
+}
